@@ -21,9 +21,10 @@ def _git(args, cwd) -> Optional[str]:
 
 
 def git_info(repo_root: str) -> Dict[str, object]:
+    """Commit and dirty state of code/config; run outputs under runs/ are excluded from 'dirty'."""
     head = _git(["rev-parse", "HEAD"], repo_root)
-    porcelain = _git(["status", "--porcelain"], repo_root)
-    diff = _git(["diff", "HEAD"], repo_root) if head else None
+    porcelain = _git(["status", "--porcelain", "--", ".", ":(exclude)runs"], repo_root)
+    diff = _git(["diff", "HEAD", "--", ".", ":(exclude)runs"], repo_root) if head else None
     return {
         "commit": head,
         "branch": _git(["rev-parse", "--abbrev-ref", "HEAD"], repo_root),
