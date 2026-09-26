@@ -1,0 +1,49 @@
+{
+ "run_type": "smoke",
+ "description": "Code-path coverage only: tiny synthetic world, 4 orders, every arm wired. Numbers are not evidence.",
+ "world": {
+  "seed": 0, "dim": 4, "n_classes": 3, "class_sep": 1.6, "sigma": 1.0,
+  "n_test_domains": 3, "n_val_domains": 2, "n_meta_domains": 3,
+  "scale_range": [0.5, 1.6], "shift_sd": 0.8, "domain_noise": 0.1,
+  "n_per_class": {"source_train": 60, "meta_train": 16, "development": 12, "dev_holdout": 12,
+                  "calibration": 12, "test_stream": 16, "test_holdout": 20}
+ },
+ "replicate_seeds": [0],
+ "model": {"norm": "source", "source_epochs": 150, "source_lr": 0.5},
+ "stream": {"batch_size": 16, "order_family": "uniform_permutation", "order_seeds": [11, 12, 13, 14],
+            "domain_sequences": null, "eval_batch_size": 60},
+ "prequential": true,
+ "subspaces": {
+  "order_aware": {"fitter": "order_aware", "k": 3, "lam": 0.1, "lr_for_scoring": 0.5,
+                  "n_meta_batches": 6, "meta_batch_size": 16, "n_probe": 48, "seed": 0},
+  "gradpca": {"fitter": "gradient_pca", "k": "match:order_aware", "n_meta_batches": 6, "meta_batch_size": 16, "seed": 0},
+  "random": {"fitter": "random", "k": "match:order_aware", "seed": 0}
+ },
+ "tuning": {"enabled": false},
+ "methods": [
+  {"name": "no_adapt", "kind": "no_adapt"},
+  {"name": "tent_full", "kind": "entropy_sgd", "subspace": null, "lr": 0.5},
+  {"name": "tent_full_lr_x0.1", "kind": "entropy_sgd", "subspace": null, "lr_from": "tent_full",
+   "lr_factor": 0.1, "control_of": "tent_full"},
+  {"name": "tent_orderaware", "kind": "entropy_sgd", "subspace": "order_aware", "lr": 0.5},
+  {"name": "tent_gradpca", "kind": "entropy_sgd", "subspace": "gradpca", "lr_from": "tent_orderaware",
+   "control_of": "tent_orderaware"},
+  {"name": "tent_random", "kind": "entropy_sgd", "subspace": "random", "lr_from": "tent_orderaware",
+   "control_of": "tent_orderaware"},
+  {"name": "norm_matched_per_step", "kind": "entropy_sgd", "subspace": null, "control_of": "tent_orderaware",
+   "norm_match": {"mode": "per_step", "target": "tent_orderaware"}},
+  {"name": "norm_matched_global", "kind": "entropy_sgd", "subspace": null, "control_of": "tent_orderaware",
+   "norm_match": {"mode": "calibrated_global", "target": "tent_orderaware", "lr_lo": 1e-4, "lr_hi": 10.0,
+                  "iters": 30, "max_relative_mismatch": 0.05, "calibration_order_seeds": [301, 302]}}
+ ],
+ "decision": {
+  "candidate": "tent_orderaware", "baseline": "tent_full", "no_adapt": "no_adapt",
+  "stability_controls": ["tent_full_lr_x0.1", "norm_matched_per_step", "norm_matched_global"],
+  "dimension_controls": ["tent_gradpca", "tent_random"],
+  "spread_metric": "std_terminal_error",
+  "mie": {"spread_abs": 0.005, "gain_abs": 0.01},
+  "tolerance": {"spread_abs": 0.0025, "gain_abs": 0.005},
+  "n_boot": 500, "boot_seed": 0
+ },
+ "resource_cap": {"max_wall_seconds": 600, "max_test_time_gradient_evals": 200000}
+}

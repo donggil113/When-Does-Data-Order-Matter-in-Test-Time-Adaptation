@@ -1,0 +1,332 @@
+{
+ "run_type": "toy_pilot",
+ "description": "Toy pilot B (genuine drift): the same test multiset replayed as contiguous domain blocks; block sequence and within-block order seeded per order.",
+ "world": {
+  "seed": 0,
+  "dim": 4,
+  "n_classes": 3,
+  "class_sep": 1.6,
+  "sigma": 1.0,
+  "n_test_domains": 4,
+  "n_val_domains": 2,
+  "n_meta_domains": 4,
+  "scale_range": [
+   0.5,
+   1.6
+  ],
+  "shift_sd": 0.8,
+  "domain_noise": 0.1,
+  "n_per_class": {
+   "source_train": 100,
+   "meta_train": 24,
+   "development": 20,
+   "dev_holdout": 30,
+   "calibration": 20,
+   "test_stream": 40,
+   "test_holdout": 50
+  }
+ },
+ "replicate_seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "model": {
+  "norm": "source",
+  "source_epochs": 200,
+  "source_lr": 0.5
+ },
+ "stream": {
+  "batch_size": 16,
+  "order_family": "domain_blocked",
+  "order_seeds": [
+   1000,
+   1001,
+   1002,
+   1003,
+   1004,
+   1005,
+   1006,
+   1007,
+   1008,
+   1009,
+   1010,
+   1011,
+   1012,
+   1013,
+   1014,
+   1015
+  ],
+  "domain_sequences": null,
+  "eval_batch_size": 100
+ },
+ "prequential": true,
+ "subspaces": {
+  "order_aware": {
+   "fitter": "order_aware",
+   "k": 4,
+   "lam": 1.0,
+   "normalized": true,
+   "n_meta_batches": 8,
+   "meta_batch_size": 16,
+   "n_probe": 96,
+   "seed": 0
+  },
+  "gradpca": {
+   "fitter": "gradient_pca",
+   "k": "match:order_aware",
+   "n_meta_batches": 8,
+   "meta_batch_size": 16,
+   "seed": 0
+  },
+  "random": {
+   "fitter": "random",
+   "k": "match:order_aware",
+   "seed": 0
+  }
+ },
+ "tuning": {
+  "enabled": true,
+  "lr_grid": [
+   0.05,
+   0.1,
+   0.2,
+   0.5,
+   1.0,
+   2.0
+  ],
+  "order_seeds": [
+   2000,
+   2001,
+   2002,
+   2003
+  ],
+  "split": "development",
+  "holdout": "dev_holdout",
+  "metric": "mean_terminal_error"
+ },
+ "methods": [
+  {
+   "name": "no_adapt",
+   "kind": "no_adapt"
+  },
+  {
+   "name": "tent_full",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "lr": "tune"
+  },
+  {
+   "name": "tent_full_lr_x0.3",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "lr_from": "tent_full",
+   "lr_factor": 0.3,
+   "control_of": "tent_full"
+  },
+  {
+   "name": "tent_full_lr_x0.1",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "lr_from": "tent_full",
+   "lr_factor": 0.1,
+   "control_of": "tent_full"
+  },
+  {
+   "name": "tent_orderaware",
+   "kind": "entropy_sgd",
+   "subspace": "order_aware",
+   "lr": "tune"
+  },
+  {
+   "name": "tent_gradpca",
+   "kind": "entropy_sgd",
+   "subspace": "gradpca",
+   "lr": "tune",
+   "control_of": "tent_orderaware"
+  },
+  {
+   "name": "tent_random",
+   "kind": "entropy_sgd",
+   "subspace": "random",
+   "lr": "tune",
+   "control_of": "tent_orderaware"
+  },
+  {
+   "name": "norm_matched_per_step",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "control_of": "tent_orderaware",
+   "norm_match": {
+    "mode": "per_step",
+    "target": "tent_orderaware"
+   }
+  },
+  {
+   "name": "norm_matched_global",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "control_of": "tent_orderaware",
+   "norm_match": {
+    "mode": "calibrated_global",
+    "target": "tent_orderaware",
+    "lr_lo": 0.0001,
+    "lr_hi": 20.0,
+    "iters": 40,
+    "max_relative_mismatch": 0.05,
+    "calibration_order_seeds": [
+     3000,
+     3001,
+     3002,
+     3003
+    ]
+   }
+  }
+ ],
+ "decision": {
+  "candidate": "tent_orderaware",
+  "baseline": "tent_full",
+  "no_adapt": "no_adapt",
+  "stability_controls": [
+   "tent_full_lr_x0.3",
+   "tent_full_lr_x0.1",
+   "norm_matched_per_step",
+   "norm_matched_global"
+  ],
+  "dimension_controls": [
+   "tent_gradpca",
+   "tent_random"
+  ],
+  "spread_metric": "std_terminal_error",
+  "mie": {
+   "spread_abs": 0.005,
+   "gain_abs": 0.01
+  },
+  "tolerance": {
+   "spread_abs": 0.0025,
+   "gain_abs": 0.005
+  },
+  "n_boot": 2000,
+  "boot_seed": 0
+ },
+ "resource_cap": {
+  "max_wall_seconds": 3600,
+  "max_test_time_gradient_evals": 400000
+ },
+ "preregistration": {
+  "frozen_utc": "2026-09-26",
+  "status": "WRITTEN_NOT_RUN",
+  "question": "On a fixed multiset replayed in K fixed orders, does restricting Tent-like entropy SGD to an order-aware parameter subspace reduce the across-order spread of terminal common-holdout error beyond what small learning rates, update-norm-matched full-space updates and dimension-matched subspaces achieve, without losing adaptation gain?",
+  "primary_metric": "terminal common-holdout error (fraction wrong) after the full replay of one order",
+  "spread_metric": "std_terminal_error",
+  "secondary_metrics": [
+   "mean_error",
+   "observed_worst_error (worst of sampled orders only)",
+   "range_error",
+   "q90_error_nearest_rank",
+   "mean_gain vs no_adapt",
+   "observed_worst_gain",
+   "online (prequential) error",
+   "mean_pairwise_disagreement",
+   "mean_pairwise_tv",
+   "per-domain terminal error",
+   "cost_ledger (actual spend, not caps)"
+  ],
+  "mie": {
+   "spread_abs": 0.005,
+   "gain_abs": 0.01
+  },
+  "tolerance": {
+   "spread_abs": 0.0025,
+   "gain_abs": 0.005
+  },
+  "seeds": {
+   "replicate_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "order_seeds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015
+   ],
+   "tuning_order_seeds": [
+    2000,
+    2001,
+    2002,
+    2003
+   ],
+   "calibration_order_seeds": [
+    3000,
+    3001,
+    3002,
+    3003
+   ],
+   "subspace_seed": 0,
+   "selection": "all listed seeds are run and reported; none may be dropped"
+  },
+  "tuning_range": {
+   "lr_grid": [
+    0.05,
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    2.0
+   ],
+   "tuned_arms": [
+    "tent_full",
+    "tent_orderaware",
+    "tent_gradpca",
+    "tent_random"
+   ],
+   "selection": "min mean dev_holdout terminal error over tuning orders; ties -> smaller lr",
+   "equal_budget": "each tuned arm gets the same grid and tuning orders",
+   "fixed_not_tuned": {
+    "order_aware.lam (normalized rho)": 1.0,
+    "order_aware.k_max": 4,
+    "small_lr_factors": [
+     0.3,
+     0.1
+    ]
+   }
+  },
+  "resource_cap": {
+   "max_wall_seconds": 3600,
+   "max_test_time_gradient_evals": 400000
+  },
+  "splits": {
+   "source_train": "labelled source; trains frozen (W, b)",
+   "meta_train": "source-distribution samples under simulated shifts M*; subspace fitting only; labels used by order_aware (supervised gain term), not by gradpca/random",
+   "development": "validation shifts V*; lr tuning stream",
+   "dev_holdout": "validation shifts V*; tuning terminal evaluation (and calibration evaluation protocol)",
+   "calibration": "validation shifts V*; stream for global update-norm calibration",
+   "test_stream": "test shifts T*; the replayed multiset (labels read only by the prequential scorer)",
+   "test_holdout": "test shifts T*; common terminal holdout (labels read only by the terminal evaluator)"
+  },
+  "decision_rule": "ordertta.analysis.decide at the committed code revision; bootstrap over orders within replicate",
+  "interpretation_limits": [
+   "synthetic linear-softmax toy; says nothing about deep networks, BN statistics, Adam, or long horizons",
+   "observed worst-of-K orders is not a risk bound over all orders",
+   "a gain/stability pattern explained by small steps or no adaptation is recorded as no added utility"
+  ]
+ }
+}
