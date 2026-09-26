@@ -205,7 +205,7 @@ def main():
                     "ncls_min": min(v["terminal_class_distribution"]["n_classes_predicted"] for v in d.values())}
                 for f in ("path", "maxshare"):
                     put(f"{ck}.diag.{KEY[arm]}.{f}.{sd}", diag_rows[(ck, arm)][sd][f],
-                        fmt(diag_rows[(ck, arm)][sd][f]),
+                        fmt(diag_rows[(ck, arm)][sd][f], 2 if f == "path" else 3),
                         f"{RUN}/{c}/summary.json:replicates[{sd}].diagnostics.{arm}[*]")
     ranks = sorted({values[k]["value"] for k in values if ".rank." in k})
     put("ranks", ranks, ", ".join(str(x) for x in ranks), f"{RUN}/*/summary.json:replicates[].subspaces.order_aware.dim")
@@ -347,7 +347,7 @@ def main():
         for r in sstat:
             sd = r["replicate"]
             d = diag_rows[("stat", arm)][sd]
-            cells += [f"{r['lrs'][arm]:.3g}", fmt(d["path"]), fmt(d["maxshare"])]
+            cells += [f"{r['lrs'][arm]:.3g}", fmt(d["path"]), fmt(d["maxshare"], 3)]
         lines.append(f"{SHORT[arm]} & " + " & ".join(cells) + " \\\\")
     lines += ["\\bottomrule", "\\end{tabular}", "\\end{table}"]
     with open(os.path.join(tab, "tab_diag.tex"), "w") as f:

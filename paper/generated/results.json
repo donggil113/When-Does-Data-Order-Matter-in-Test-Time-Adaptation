@@ -427,17 +427,17 @@
   },
   "drift.diag.cand.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.tent_orderaware[*]",
-   "tex": "0.46",
+   "tex": "0.458",
    "value": 0.4583333333333333
   },
   "drift.diag.cand.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.tent_orderaware[*]",
-   "tex": "0.42",
+   "tex": "0.425",
    "value": 0.425
   },
   "drift.diag.cand.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.tent_orderaware[*]",
-   "tex": "0.86",
+   "tex": "0.865",
    "value": 0.865
   },
   "drift.diag.cand.path.r0": {
@@ -457,17 +457,17 @@
   },
   "drift.diag.full.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.tent_full[*]",
-   "tex": "0.52",
+   "tex": "0.518",
    "value": 0.5183333333333333
   },
   "drift.diag.full.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.tent_full[*]",
-   "tex": "0.48",
+   "tex": "0.483",
    "value": 0.48333333333333334
   },
   "drift.diag.full.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.tent_full[*]",
-   "tex": "0.70",
+   "tex": "0.702",
    "value": 0.7016666666666667
   },
   "drift.diag.full.path.r0": {
@@ -487,17 +487,17 @@
   },
   "drift.diag.lrA.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.41",
+   "tex": "0.407",
    "value": 0.4066666666666667
   },
   "drift.diag.lrA.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.45",
+   "tex": "0.450",
    "value": 0.45
   },
   "drift.diag.lrA.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.68",
+   "tex": "0.677",
    "value": 0.6766666666666666
   },
   "drift.diag.lrA.path.r0": {
@@ -517,17 +517,17 @@
   },
   "drift.diag.lrB.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.37",
+   "tex": "0.372",
    "value": 0.37166666666666665
   },
   "drift.diag.lrB.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.45",
+   "tex": "0.448",
    "value": 0.4483333333333333
   },
   "drift.diag.lrB.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.66",
+   "tex": "0.658",
    "value": 0.6583333333333333
   },
   "drift.diag.lrB.path.r0": {
@@ -547,17 +547,17 @@
   },
   "drift.diag.nglob.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.norm_matched_global[*]",
-   "tex": "0.48",
+   "tex": "0.478",
    "value": 0.47833333333333333
   },
   "drift.diag.nglob.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.norm_matched_global[*]",
-   "tex": "0.75",
+   "tex": "0.753",
    "value": 0.7533333333333333
   },
   "drift.diag.nglob.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.norm_matched_global[*]",
-   "tex": "0.68",
+   "tex": "0.682",
    "value": 0.6816666666666666
   },
   "drift.diag.nglob.path.r0": {
@@ -577,17 +577,17 @@
   },
   "drift.diag.noad.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.no_adapt[*]",
-   "tex": "0.37",
+   "tex": "0.370",
    "value": 0.37
   },
   "drift.diag.noad.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.no_adapt[*]",
-   "tex": "0.45",
+   "tex": "0.447",
    "value": 0.44666666666666666
   },
   "drift.diag.noad.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.no_adapt[*]",
-   "tex": "0.59",
+   "tex": "0.587",
    "value": 0.5866666666666667
   },
   "drift.diag.noad.path.r0": {
@@ -607,17 +607,17 @@
   },
   "drift.diag.nstep.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.56",
+   "tex": "0.563",
    "value": 0.5633333333333334
   },
   "drift.diag.nstep.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.75",
+   "tex": "0.750",
    "value": 0.75
   },
   "drift.diag.nstep.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.77",
+   "tex": "0.772",
    "value": 0.7716666666666666
   },
   "drift.diag.nstep.path.r0": {
@@ -637,17 +637,17 @@
   },
   "drift.diag.util.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r0].diagnostics.tent_utility_only[*]",
-   "tex": "0.46",
+   "tex": "0.458",
    "value": 0.4583333333333333
   },
   "drift.diag.util.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r1].diagnostics.tent_utility_only[*]",
-   "tex": "0.45",
+   "tex": "0.452",
    "value": 0.45166666666666666
   },
   "drift.diag.util.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:replicates[r2].diagnostics.tent_utility_only[*]",
-   "tex": "0.86",
+   "tex": "0.865",
    "value": 0.865
   },
   "drift.diag.util.path.r0": {
@@ -3271,17 +3271,17 @@
   },
   "reshuf.diag.cand.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.tent_orderaware[*]",
-   "tex": "0.37",
+   "tex": "0.367",
    "value": 0.36666666666666664
   },
   "reshuf.diag.cand.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.tent_orderaware[*]",
-   "tex": "0.42",
+   "tex": "0.420",
    "value": 0.42
   },
   "reshuf.diag.cand.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.tent_orderaware[*]",
-   "tex": "0.78",
+   "tex": "0.782",
    "value": 0.7816666666666666
   },
   "reshuf.diag.cand.path.r0": {
@@ -3301,17 +3301,17 @@
   },
   "reshuf.diag.full.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.tent_full[*]",
-   "tex": "0.54",
+   "tex": "0.535",
    "value": 0.535
   },
   "reshuf.diag.full.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.tent_full[*]",
-   "tex": "0.45",
+   "tex": "0.450",
    "value": 0.45
   },
   "reshuf.diag.full.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.tent_full[*]",
-   "tex": "0.69",
+   "tex": "0.687",
    "value": 0.6866666666666666
   },
   "reshuf.diag.full.path.r0": {
@@ -3331,17 +3331,17 @@
   },
   "reshuf.diag.lrA.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.43",
+   "tex": "0.428",
    "value": 0.42833333333333334
   },
   "reshuf.diag.lrA.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.45",
+   "tex": "0.448",
    "value": 0.4483333333333333
   },
   "reshuf.diag.lrA.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.68",
+   "tex": "0.677",
    "value": 0.6766666666666666
   },
   "reshuf.diag.lrA.path.r0": {
@@ -3361,17 +3361,17 @@
   },
   "reshuf.diag.lrB.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.37",
+   "tex": "0.372",
    "value": 0.37166666666666665
   },
   "reshuf.diag.lrB.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.45",
+   "tex": "0.447",
    "value": 0.44666666666666666
   },
   "reshuf.diag.lrB.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.66",
+   "tex": "0.658",
    "value": 0.6583333333333333
   },
   "reshuf.diag.lrB.path.r0": {
@@ -3391,17 +3391,17 @@
   },
   "reshuf.diag.nglob.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.norm_matched_global[*]",
-   "tex": "0.37",
+   "tex": "0.373",
    "value": 0.37333333333333335
   },
   "reshuf.diag.nglob.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.norm_matched_global[*]",
-   "tex": "0.50",
+   "tex": "0.498",
    "value": 0.49833333333333335
   },
   "reshuf.diag.nglob.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.norm_matched_global[*]",
-   "tex": "0.68",
+   "tex": "0.677",
    "value": 0.6766666666666666
   },
   "reshuf.diag.nglob.path.r0": {
@@ -3421,17 +3421,17 @@
   },
   "reshuf.diag.noad.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.no_adapt[*]",
-   "tex": "0.37",
+   "tex": "0.370",
    "value": 0.37
   },
   "reshuf.diag.noad.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.no_adapt[*]",
-   "tex": "0.45",
+   "tex": "0.447",
    "value": 0.44666666666666666
   },
   "reshuf.diag.noad.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.no_adapt[*]",
-   "tex": "0.59",
+   "tex": "0.587",
    "value": 0.5866666666666667
   },
   "reshuf.diag.noad.path.r0": {
@@ -3451,17 +3451,17 @@
   },
   "reshuf.diag.nstep.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.37",
+   "tex": "0.372",
    "value": 0.37166666666666665
   },
   "reshuf.diag.nstep.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.46",
+   "tex": "0.463",
    "value": 0.4633333333333333
   },
   "reshuf.diag.nstep.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.73",
+   "tex": "0.727",
    "value": 0.7266666666666667
   },
   "reshuf.diag.nstep.path.r0": {
@@ -3481,17 +3481,17 @@
   },
   "reshuf.diag.util.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r0].diagnostics.tent_utility_only[*]",
-   "tex": "0.37",
+   "tex": "0.367",
    "value": 0.36666666666666664
   },
   "reshuf.diag.util.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r1].diagnostics.tent_utility_only[*]",
-   "tex": "0.45",
+   "tex": "0.445",
    "value": 0.445
   },
   "reshuf.diag.util.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:replicates[r2].diagnostics.tent_utility_only[*]",
-   "tex": "0.78",
+   "tex": "0.782",
    "value": 0.7816666666666666
   },
   "reshuf.diag.util.path.r0": {
@@ -4386,17 +4386,17 @@
   },
   "stat.diag.cand.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.tent_orderaware[*]",
-   "tex": "0.37",
+   "tex": "0.367",
    "value": 0.36666666666666664
   },
   "stat.diag.cand.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.tent_orderaware[*]",
-   "tex": "0.43",
+   "tex": "0.427",
    "value": 0.4266666666666667
   },
   "stat.diag.cand.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.tent_orderaware[*]",
-   "tex": "0.78",
+   "tex": "0.782",
    "value": 0.7816666666666666
   },
   "stat.diag.cand.path.r0": {
@@ -4416,17 +4416,17 @@
   },
   "stat.diag.full.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.tent_full[*]",
-   "tex": "0.53",
+   "tex": "0.532",
    "value": 0.5316666666666666
   },
   "stat.diag.full.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.tent_full[*]",
-   "tex": "0.54",
+   "tex": "0.540",
    "value": 0.54
   },
   "stat.diag.full.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.tent_full[*]",
-   "tex": "0.69",
+   "tex": "0.688",
    "value": 0.6883333333333334
   },
   "stat.diag.full.path.r0": {
@@ -4446,17 +4446,17 @@
   },
   "stat.diag.lrA.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.43",
+   "tex": "0.433",
    "value": 0.43333333333333335
   },
   "stat.diag.lrA.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.46",
+   "tex": "0.457",
    "value": 0.45666666666666667
   },
   "stat.diag.lrA.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.tent_full_lr_x0.3[*]",
-   "tex": "0.68",
+   "tex": "0.677",
    "value": 0.6766666666666666
   },
   "stat.diag.lrA.path.r0": {
@@ -4476,17 +4476,17 @@
   },
   "stat.diag.lrB.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.37",
+   "tex": "0.372",
    "value": 0.37166666666666665
   },
   "stat.diag.lrB.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.45",
+   "tex": "0.448",
    "value": 0.4483333333333333
   },
   "stat.diag.lrB.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.tent_full_lr_x0.1[*]",
-   "tex": "0.66",
+   "tex": "0.658",
    "value": 0.6583333333333333
   },
   "stat.diag.lrB.path.r0": {
@@ -4506,17 +4506,17 @@
   },
   "stat.diag.nglob.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.norm_matched_global[*]",
-   "tex": "0.37",
+   "tex": "0.373",
    "value": 0.37333333333333335
   },
   "stat.diag.nglob.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.norm_matched_global[*]",
-   "tex": "0.56",
+   "tex": "0.565",
    "value": 0.565
   },
   "stat.diag.nglob.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.norm_matched_global[*]",
-   "tex": "0.68",
+   "tex": "0.677",
    "value": 0.6766666666666666
   },
   "stat.diag.nglob.path.r0": {
@@ -4536,17 +4536,17 @@
   },
   "stat.diag.noad.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.no_adapt[*]",
-   "tex": "0.37",
+   "tex": "0.370",
    "value": 0.37
   },
   "stat.diag.noad.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.no_adapt[*]",
-   "tex": "0.45",
+   "tex": "0.447",
    "value": 0.44666666666666666
   },
   "stat.diag.noad.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.no_adapt[*]",
-   "tex": "0.59",
+   "tex": "0.587",
    "value": 0.5866666666666667
   },
   "stat.diag.noad.path.r0": {
@@ -4566,17 +4566,17 @@
   },
   "stat.diag.nstep.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.37",
+   "tex": "0.372",
    "value": 0.37166666666666665
   },
   "stat.diag.nstep.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.49",
+   "tex": "0.495",
    "value": 0.495
   },
   "stat.diag.nstep.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.norm_matched_per_step_causal[*]",
-   "tex": "0.72",
+   "tex": "0.722",
    "value": 0.7216666666666667
   },
   "stat.diag.nstep.path.r0": {
@@ -4596,17 +4596,17 @@
   },
   "stat.diag.util.maxshare.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r0].diagnostics.tent_utility_only[*]",
-   "tex": "0.37",
+   "tex": "0.367",
    "value": 0.36666666666666664
   },
   "stat.diag.util.maxshare.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r1].diagnostics.tent_utility_only[*]",
-   "tex": "0.45",
+   "tex": "0.445",
    "value": 0.445
   },
   "stat.diag.util.maxshare.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:replicates[r2].diagnostics.tent_utility_only[*]",
-   "tex": "0.78",
+   "tex": "0.782",
    "value": 0.7816666666666666
   },
   "stat.diag.util.path.r0": {

@@ -77,7 +77,7 @@ The unpacked tree lives in the session scratchpad and is not committed. To rebui
   references (pages 8--9) and the appendix (pages 10--14) follow.
 - `paper/build/main.log`: 0 overfull boxes, 0 undefined references, 0 undefined citations.
 - Budget log in `paper/generated/budget_log.tsv`:
-  - build and static checks: 14 capped runs, 79.21 CPU-s of 600. This includes two failed builds (an
+  - build and static checks: 15 capped runs, 81.34 CPU-s of 600. This includes two failed builds (an
     unescaped underscore; a missing font map), kept in the log, and a full unit-test run.
-  - analysis: 10 runs, 2.41 CPU-s of 600.
+  - analysis: 11 runs, 2.65 CPU-s of 600.
   - peak RSS ≤ 41.1 MiB.

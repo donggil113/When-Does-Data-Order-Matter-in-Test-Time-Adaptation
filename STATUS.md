@@ -15,14 +15,18 @@
 ## 원고 Working Draft v0 (이번 작업)
 
 - **실행 범위.** 새 실험, 재학습, λ/lr 확대, 새 world, 실데이터 반입은 없었다. 수행한 작업은 기존 결과의 재분석과 소형 수식 검사뿐이다.
-  - 분석 CPU: 2.4초 / 600초.
-  - 빌드·정적 검사 CPU: 79.2초 / 600초. 실패한 빌드 2회를 포함해 `paper/generated/budget_log.tsv`에 기록했다.
+  - 분석 CPU: 2.65초 / 600초.
+  - 빌드·정적 검사 CPU: 81.3초 / 600초. 실패한 빌드 2회를 포함해 `paper/generated/budget_log.tsv`에 기록했다.
 - **숫자의 출처.** `paper/scripts/export_results.py`가 `runs/stage2_order_penalty_0119a34/`의 원자료를 읽어 표와 `\res{}` 매크로를 생성한다. 본문과 abstract는 이 매크로만 쓴다.
 - **r0/r2 동일성.** 9개 (조건, seed) 쌍 중 6개(r0, r2)에서 candidate와 utility-only가 완전히 같았다: 같은 pool 방향, 같은 projector, 같은 lr, 같은 시작 상태, 그리고 raw log의 θ_T hash와 step별 update norm까지 동일했다.
   - 원인: 조기 종료로 정해진 rank 2에서, 같은 통계로 효용 상위 2개를 고르면 penalty가 고른 방향과 일치한다. 이후 과정은 결정적이다.
 - **수식 검사.** 두 단계 항등식이 유리수 quadratic 200/200 사례에서 정확히 일치했다. 잔차 상한도 quartic 200/200 사례에서 성립했다. 증명이 아니라 수치 검사다.
 - **표시 이름.** `tent_full`은 원고에서 "EM-toy"로 표시한다(공식 Tent 구성과 다름). arm id와 run id는 바꾸지 않았다. meta label을 쓰는 부분공간 arm은 source-free라고 부르지 않았다.
 - **요약 대조.** STATUS의 stage-2 stationary 표 96개 셀이 원자료와 일치했다. 정정은 필요 없었다.
+- **정정 이력 (반올림).**
+  - stage 2 해석 절에 쓴 "0.87(drift)"는 원자료 `drift_fixed_batches/summary.json` r2 `tent_orderaware` terminal max_share 0.865를 사람이 반올림한 값이다.
+  - 원고 첫 빌드는 Python 반올림으로 "0.86"을 표시했다.
+  - 모호함을 없애기 위해 원고는 소수 셋째 자리(0.865, 0.782, 0.587)로 바꿨다. 기존 STATUS 문장은 보존한다.
 - **빌드 도구.** 서명된 Ubuntu 저장소의 TeX Live .deb를 **시스템에 설치하지 않고** scratchpad에 풀어 썼다(46.1 MB). 페이지 확인용으로 poppler-utils도 같은 방식으로 썼다. 절차는 `paper/BUILD.md`에 있다.
 
 ## Stage 2: 감독정보와 배치 효과를 통제한 제한적 TTA 진단 (commit `0119a34`)
