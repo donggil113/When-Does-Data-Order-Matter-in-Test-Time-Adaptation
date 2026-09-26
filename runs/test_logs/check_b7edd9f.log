@@ -1,0 +1,91 @@
+commit: b7edd9f7dae4d99f2aa35471c2b2e1595cfade05
+utc_end: 2026-09-26T15:21:32+00:00
+python: 3.11.15  platform: Linux-6.18.44-fc-v37-x86_64-with-glibc2.39
+command: sh scripts/check.sh
+exit_code: 0
+wall_seconds: 11.88
+peak_child_rss_mib: 26.5
+
+----- stdout -----
+dry-run OK: configs/cpu_smoke.json
+dry-run OK: configs/pilot_toy_drift.json
+dry-run OK: configs/pilot_toy_stationary.json
+
+----- stderr -----
+test_dominates_controls_on_sampled_orders (tests.test_analysis.Decision.test_dominates_controls_on_sampled_orders) ... ok
+test_incomplete_when_any_required_arm_not_ok (tests.test_analysis.Decision.test_incomplete_when_any_required_arm_not_ok) ... ok
+test_matched_by_small_lr_control (tests.test_analysis.Decision.test_matched_by_small_lr_control) ... ok
+test_no_stabilisation (tests.test_analysis.Decision.test_no_stabilisation) ... ok
+test_stable_only_because_not_adapting (tests.test_analysis.Decision.test_stable_only_because_not_adapting) ... ok
+test_compare_order_families (tests.test_analysis.Families.test_compare_order_families) ... ok
+test_bootstrap_ci_is_paired (tests.test_analysis.Stats.test_bootstrap_ci_is_paired) ... ok
+test_nearest_rank_quantile (tests.test_analysis.Stats.test_nearest_rank_quantile) ... ok
+test_order_stats (tests.test_analysis.Stats.test_order_stats) ... ok
+test_multi_step_prediction_residual_is_third_order (tests.test_quadratic_order.NonQuadraticResidual.test_multi_step_prediction_residual_is_third_order) ... ok
+test_permutations_of_different_multisets_rejected (tests.test_quadratic_order.NonQuadraticResidual.test_permutations_of_different_multisets_rejected) ... ok
+test_second_order_term_is_only_local (tests.test_quadratic_order.NonQuadraticResidual.test_second_order_term_is_only_local)
+Scope check: at eta * L ~ 0.3 the cubic remainder is comparable to the second-order term. ... ok
+test_two_step_residual_is_third_order (tests.test_quadratic_order.NonQuadraticResidual.test_two_step_residual_is_third_order) ... ok
+test_linear_output_difference_is_exact_for_two_quadratic_steps (tests.test_quadratic_order.OutputLevel.test_linear_output_difference_is_exact_for_two_quadratic_steps) ... ok
+test_nonlinear_output_residual_is_third_order (tests.test_quadratic_order.OutputLevel.test_nonlinear_output_residual_is_third_order) ... ok
+test_output_orthogonal_to_subspace_is_order_invariant (tests.test_quadratic_order.OutputLevel.test_output_orthogonal_to_subspace_is_order_invariant) ... ok
+test_projected_two_step_identity (tests.test_quadratic_order.OutputLevel.test_projected_two_step_identity) ... ok
+test_only_plain_sgd_is_supported (tests.test_quadratic_order.Scope.test_only_plain_sgd_is_supported) ... ok
+test_commuting_hessians_shared_minimiser_commute (tests.test_quadratic_order.TwoStepQuadratic.test_commuting_hessians_shared_minimiser_commute) ... ok
+test_exact_identity_for_quadratics (tests.test_quadratic_order.TwoStepQuadratic.test_exact_identity_for_quadratics) ... ok
+test_identical_losses_commute (tests.test_quadratic_order.TwoStepQuadratic.test_identical_losses_commute) ... ok
+test_same_curvature_different_targets_is_order_dependent (tests.test_quadratic_order.TwoStepQuadratic.test_same_curvature_different_targets_is_order_dependent) ... ok
+test_disjoint_splits (tests.test_replay.Integrity.test_disjoint_splits) ... ok
+test_duplicate_detected (tests.test_replay.Integrity.test_duplicate_detected) ... ok
+test_last_partial_batch_kept (tests.test_replay.Integrity.test_last_partial_batch_kept) ... ok
+test_missing_detected (tests.test_replay.Integrity.test_missing_detected) ... ok
+test_partial_consumption_fails_verification (tests.test_replay.Integrity.test_partial_consumption_fails_verification) ... ok
+test_single_replay_only (tests.test_replay.Integrity.test_single_replay_only) ... ok
+test_unknown_detected (tests.test_replay.Integrity.test_unknown_detected) ... ok
+test_batches_expose_no_labels_or_domains (tests.test_replay.LabelAccess.test_batches_expose_no_labels_or_domains) ... ok
+test_overcommit_detected (tests.test_replay.LabelAccess.test_overcommit_detected) ... ok
+test_prequential_oracle_blocks_future_labels (tests.test_replay.LabelAccess.test_prequential_oracle_blocks_future_labels) ... ok
+test_vault_denies_unregistered_reader (tests.test_replay.LabelAccess.test_vault_denies_unregistered_reader) ... ok
+test_domain_blocked_orders_are_contiguous (tests.test_replay.Orders.test_domain_blocked_orders_are_contiguous) ... ok
+test_explicit_domain_sequences_validated (tests.test_replay.Orders.test_explicit_domain_sequences_validated) ... ok
+test_repeated_ids_in_multiset_supported (tests.test_replay.Orders.test_repeated_ids_in_multiset_supported) ... ok
+test_uniform_orders_are_deterministic_permutations (tests.test_replay.Orders.test_uniform_orders_are_deterministic_permutations) ... ok
+test_empty_candidate_subspace_is_reported_not_padded (tests.test_runner.EndToEnd.test_empty_candidate_subspace_is_reported_not_padded) ... ok
+test_outputs_audits_and_invariants (tests.test_runner.EndToEnd.test_outputs_audits_and_invariants) ... ok
+test_same_config_is_deterministic (tests.test_runner.EndToEnd.test_same_config_is_deterministic) ... ok
+test_tuning_and_drift_family_path (tests.test_runner.EndToEnd.test_tuning_and_drift_family_path) ... ok
+test_cap_exceeded_is_preserved (tests.test_runner.FailurePreservation.test_cap_exceeded_is_preserved) ... ok
+test_failed_calibration_marks_cells_not_run_and_decision_incomplete (tests.test_runner.FailurePreservation.test_failed_calibration_marks_cells_not_run_and_decision_incomplete) ... ok
+test_failed_subspace_fit_only_blocks_dependent_arms (tests.test_runner.FailurePreservation.test_failed_subspace_fit_only_blocks_dependent_arms) ... ok
+test_all_shipped_configs_validate_and_dry_run (tests.test_runner.Validation.test_all_shipped_configs_validate_and_dry_run) ... ok
+test_rejects_bad_configs (tests.test_runner.Validation.test_rejects_bad_configs) ... ok
+test_empty_subspace_means_no_movement (tests.test_subspace.API.test_empty_subspace_means_no_movement) ... ok
+test_gradient_pca_recovers_dominant_direction (tests.test_subspace.API.test_gradient_pca_recovers_dominant_direction) ... ok
+test_projection_is_idempotent_and_lift_coords_roundtrip (tests.test_subspace.API.test_projection_is_idempotent_and_lift_coords_roundtrip) ... ok
+test_random_subspace_is_seeded (tests.test_subspace.API.test_random_subspace_is_seeded) ... ok
+test_rejects_non_orthonormal_basis (tests.test_subspace.API.test_rejects_non_orthonormal_basis) ... ok
+test_meta_and_test_costs_are_kept_apart (tests.test_subspace.Ledger.test_meta_and_test_costs_are_kept_apart) ... ok
+test_chosen_subspace_has_smaller_local_order_term (tests.test_subspace.OrderAwareFitter.test_chosen_subspace_has_smaller_local_order_term)
+Numerical fixture: second-order output-level order term in the chosen subspace vs. full space. ... ok
+test_commuting_direction_survives_any_lambda (tests.test_subspace.OrderAwareFitter.test_commuting_direction_survives_any_lambda) ... ok
+test_lambda_zero_picks_gain (tests.test_subspace.OrderAwareFitter.test_lambda_zero_picks_gain) ... ok
+test_large_lambda_avoids_order_sensitive_direction (tests.test_subspace.OrderAwareFitter.test_large_lambda_avoids_order_sensitive_direction) ... ok
+test_needs_two_batches (tests.test_subspace.OrderAwareFitter.test_needs_two_batches) ... ok
+test_normalized_score_is_scale_free (tests.test_subspace.OrderAwareFitter.test_normalized_score_is_scale_free) ... ok
+test_returns_empty_when_nothing_helps (tests.test_subspace.OrderAwareFitter.test_returns_empty_when_nothing_helps) ... ok
+test_adaptation_is_order_dependent_in_this_fixture (tests.test_toy_and_controls.Controls.test_adaptation_is_order_dependent_in_this_fixture) ... ok
+test_global_calibration_hits_target_and_reports_mismatch (tests.test_toy_and_controls.Controls.test_global_calibration_hits_target_and_reports_mismatch) ... ok
+test_no_adapt_is_exactly_order_invariant (tests.test_toy_and_controls.Controls.test_no_adapt_is_exactly_order_invariant) ... ok
+test_per_step_norm_matching_copies_step_norms (tests.test_toy_and_controls.Controls.test_per_step_norm_matching_copies_step_norms) ... ok
+test_small_lr_validation_and_first_order_scaling (tests.test_toy_and_controls.Controls.test_small_lr_validation_and_first_order_scaling) ... ok
+test_evaluation_does_not_change_parameters (tests.test_toy_and_controls.Evaluator.test_evaluation_does_not_change_parameters) ... ok
+test_holdout_must_be_disjoint_from_stream (tests.test_toy_and_controls.Evaluator.test_holdout_must_be_disjoint_from_stream) ... ok
+test_non_terminal_evaluation_refused (tests.test_toy_and_controls.Evaluator.test_non_terminal_evaluation_refused) ... ok
+test_pairwise_output_difference (tests.test_toy_and_controls.Evaluator.test_pairwise_output_difference) ... ok
+test_entropy_and_ce_gradients_match_finite_differences (tests.test_toy_and_controls.Gradients.test_entropy_and_ce_gradients_match_finite_differences) ... ok
+test_hvp_is_symmetric (tests.test_toy_and_controls.Gradients.test_hvp_is_symmetric) ... ok
+
+----------------------------------------------------------------------
+Ran 70 tests in 11.274s
+
+OK
