@@ -17,7 +17,7 @@ Python 3.10 이상, **표준 라이브러리만** 필요하다. numpy, torch, py
 ## 실행
 
 ```sh
-# 전체 검사: 70개 unit test + 모든 config dry-run
+# 전체 검사: 83개 unit test + 모든 config dry-run / stage 검증
 sh scripts/check.sh
 
 # smoke run (코드 경로 검증용, 약 3초)
@@ -26,7 +26,11 @@ PYTHONPATH=src python3 -m ordertta.run --config configs/cpu_smoke.json --run-id 
 # 파일럿 config 검증만 (적응 없음)
 PYTHONPATH=src python3 -m ordertta.run --config configs/pilot_toy_drift.json --dry-run
 
-# (승인 후) toy pilot과 family 비교
+# stage 2 진단: 세 조건, 공유 CPU 예산 3,600초, RLIMIT_AS 3 GiB, 1 worker, 1 thread.
+# 이미 실행했다. 결과는 runs/stage2_order_penalty_0119a34/, 판정은 STATUS.md 참조
+PYTHONPATH=src python3 -m ordertta.stage --stage configs/stage2_order_penalty_diagnostic.json --run-id <id>
+
+# (stage-2 설계로 대체됨, 실행하지 않음) 원래 toy pilot과 family 비교
 PYTHONPATH=src python3 -m ordertta.run --config configs/pilot_toy_stationary.json
 PYTHONPATH=src python3 -m ordertta.run --config configs/pilot_toy_drift.json
 PYTHONPATH=src python3 -m ordertta.compare --a runs/<stationary>/summary.json --b runs/<drift>/summary.json
@@ -51,9 +55,10 @@ run마다 `runs/<run_id>/` 아래에 세 파일이 생긴다.
 | `src/ordertta/subspace.py` | `AdaptationSubspace` 최소 API, full/random/gradient-PCA/order-aware fitter, source/meta와 test-time 비용을 분리하는 `CostLedger` |
 | `src/ordertta/toy.py` | 합성 shifted-Gaussian world(모든 split이 서로소)와 선형 softmax 모델. γ,β를 적응한다 |
 | `src/ordertta/runner.py` | CPU runner, config 검증, tuning, calibration, 실패와 cap 보존, 산출물 기록 |
-| `src/ordertta/analysis.py` | 순서 통계, 짝지은 계층 bootstrap, 사전등록 판정 규칙, order family 비교 |
+| `src/ordertta/analysis.py` | 순서 통계, 짝지은 계층 bootstrap(stage 1), seed별 paired 요약과 stage-2 판정 규칙(seed와 order를 합친 CI 없음), order family 비교 |
+| `src/ordertta/stage.py` | 여러 조건을 하나의 CPU 예산과 메모리 상한 아래에서 실행하고 판정하는 stage driver |
 | `configs/` | `cpu_smoke.json`, 사전등록된 `pilot_toy_stationary.json`과 `pilot_toy_drift.json` |
-| `tests/` | unittest 70개 |
+| `tests/` | unittest 83개 |
 | `runs/` | 실제 실행 산출물과 검사 로그 |
 
 ## 상태 라벨 규약

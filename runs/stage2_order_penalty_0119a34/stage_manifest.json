@@ -1,0 +1,85 @@
+{
+ "argv": [
+  "/home/user/When-Does-Data-Order-Matter-in-Test-Time-Adaptation/src/ordertta/stage.py",
+  "--stage",
+  "configs/stage2_order_penalty_diagnostic.json",
+  "--run-id",
+  "stage2_order_penalty_0119a34"
+ ],
+ "conditions": {
+  "drift_fixed_batches": {
+   "config": "configs/stage2_drift_fixed_batches.json",
+   "config_file_sha256": "a90d9ef6d94deec307af85fdcba82333d0a381e4dd6f812b4328eb422e54e9e2",
+   "config_sha256": "623939d3cdd14d058962ee722e40bf430b414bf430afacbfcb63e184b785d70c",
+   "cpu_seconds": 47.23785208800001,
+   "out_dir": "runs/stage2_order_penalty_0119a34/drift_fixed_batches",
+   "status": "RUN_COMPLETED"
+  },
+  "stationary_fixed_batches": {
+   "config": "configs/stage2_stationary_fixed_batches.json",
+   "config_file_sha256": "b7d268974837332723211d00d8ab6756c1f6dd0456209ed84e907d854fdb9bd0",
+   "config_sha256": "3dfd753d85b056c8d9d960954e8e528838faf84e12f2c380e0388a315a921f21",
+   "cpu_seconds": 41.087141773999996,
+   "out_dir": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches",
+   "status": "RUN_COMPLETED"
+  },
+  "stationary_reshuffle": {
+   "config": "configs/stage2_stationary_reshuffle.json",
+   "config_file_sha256": "3e95727dc54707158bd6eee088ba2225e4a17601e1d306450e2c88b325eb7b21",
+   "config_sha256": "ef7f0a2f856a0b4b5846eafc5e207ff80e8088e01f6c37b9b7b26a76dddccb8e",
+   "cpu_seconds": 40.58037868599999,
+   "out_dir": "runs/stage2_order_penalty_0119a34/stationary_reshuffle",
+   "status": "RUN_COMPLETED"
+  }
+ },
+ "cpu_budget_seconds": 3600,
+ "cpu_deadline_reserve": 120,
+ "cpu_seconds_total_incl_children": 128.905372548,
+ "environment": {
+  "cpu_count": 4,
+  "gpu": null,
+  "implementation": "CPython",
+  "machine": "x86_64",
+  "platform": "Linux-6.18.44-fc-v37-x86_64-with-glibc2.39",
+  "python": "3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]",
+  "third_party_packages_used": []
+ },
+ "git": {
+  "branch": "claude/data-order-test-time-adaptation-runqs4",
+  "commit": "0119a3440b9e995bd9875bf6ce82e0c05d6fd794",
+  "diff_sha256": null,
+  "dirty": false,
+  "dirty_files": []
+ },
+ "install_and_download_cost": "none: no packages installed, no models or data downloaded in this stage",
+ "limits": {
+  "RLIMIT_AS": [
+   3221225472,
+   3221225472
+  ],
+  "RLIMIT_CPU": [
+   3605,
+   3610
+  ],
+  "cpu_seconds_before_limits": 0.07370480800000001,
+  "thread_env": {
+   "MKL_NUM_THREADS": "1",
+   "NUMEXPR_NUM_THREADS": "1",
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1"
+  },
+  "threads_at_start": 1
+ },
+ "peak_rss_mib_children": 79.12109375,
+ "peak_rss_mib_self": 79.74609375,
+ "run_id": "stage2_order_penalty_0119a34",
+ "stage_config": "configs/stage2_order_penalty_diagnostic.json",
+ "stage_config_file_sha256": "d551168a93be8d31197135f48baf6dfb04d67c557f16b45a799a7894787d9a50",
+ "stage_config_sha256": "a0ccf28264bf4d41fa5a9abed2968e7976ada2225d522102dff7bef8c872d483",
+ "stage_summary_sha256": "0a16404393f88bf9c000a2c2b1f6add0e19313dc9b0524e8996420c1a8863247",
+ "threads_at_end": 1,
+ "utc_end": "2026-09-26T16:08:34+00:00",
+ "utc_start": "2026-09-26T16:06:24+00:00",
+ "wall_seconds": 130.3171872999999,
+ "workers": 1
+}
