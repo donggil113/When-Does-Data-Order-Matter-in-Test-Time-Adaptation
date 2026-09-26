@@ -211,9 +211,12 @@ def replay_one(ctx: Context, adapter: Adapter, split: str, holdout_split: str, o
                                                  if r != PrequentialLabelOracle.READER),
             "prequential_violations": len(oracle.violations) if oracle else 0,
             "gradient_evals": grads, "wall_seconds": wall, "n_steps": loader.num_batches}
+    # Adapters never read labels. Tuning *selects* an lr by holdout error, so that phase uses holdout labels.
+    uses_labels = phase == "tuning"
+    note = (f"terminal holdout={holdout_split}; stream labels read only by the prequential scorer"
+            + ("; lr selection reads holdout labels" if uses_labels else ""))
     ctx.ledger.add(CostRecord(f"{phase}:{method}/{order.name}", split, n, sha256_json(world.ids(split)),
-                              uses_labels=False, gradient_evals=grads, wall_seconds=wall,
-                              notes=f"terminal holdout={holdout_split}; stream labels read only by prequential scorer"))
+                              uses_labels=uses_labels, gradient_evals=grads, wall_seconds=wall, notes=note))
     return result, info
 
 

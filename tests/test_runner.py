@@ -107,6 +107,8 @@ class EndToEnd(RunnerTestCase):
         self.assertAlmostEqual(rep["lrs"]["tent_full_lr_x0.1"], 0.1 * rep["tuned_lrs"]["tent_full"])
         self.assertTrue(all(o["name"].startswith("blocked_") for o in rep["orders"]))
         self.assertGreater(s["cost_ledger"]["totals"]["tuning"]["gradient_evals"], 0)
+        self.assertTrue(s["cost_ledger"]["totals"]["tuning"]["any_labels"])  # selection reads dev_holdout labels
+        self.assertFalse(s["cost_ledger"]["totals"]["test_time"]["any_labels"])
         self.assertEqual(sum(1 for e in events if e["event"] == "tuning"), 4)
 
     def test_empty_candidate_subspace_is_reported_not_padded(self):
