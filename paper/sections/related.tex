@@ -1,0 +1,32 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Test-time adaptation and stream order.} Tent adapts batch-normalization affine parameters by
+entropy minimization while re-estimating normalization statistics on each test batch~\citep{wang2021tent}.
+EATA filters samples by entropy and adds a Fisher regularizer~\citep{niu2022eata}. SAR targets mixed shifts,
+single-sample batches and online label shift, the last of which is constructed by reordering samples, and
+resets the model when an entropy statistic collapses~\citep{niu2023sar}. NOTE and RoTTA study temporally
+correlated streams~\citep{gong2022note,yuan2023rotta}, and TTAB documents how online batch dependency
+complicates model selection~\citep{zhao2023pitfalls}. CoTTA reports variation across corruption orders and
+uses stochastic restoration~\citep{wang2022cotta}; RMT reports a large gap between easy-to-hard and
+hard-to-easy orders~\citep{dobler2023rmt}; DDA reports that Tent is sensitive to shuffled versus ordered
+data~\citep{gao2023dda}. Our work does not propose a TTA method for these benchmarks. It isolates one
+proposed mechanism for reducing order sensitivity in a setting small enough to control.
+
+\paragraph{Resetting and continual TTA.} RDumb resets periodically~\citep{press2023rdumb}, PeTTA analyses
+collapse in recurring scenarios~\citep{hoang2024petta}, and ASR decides adaptively when and where to
+reset~\citep{lim2026asr}. Resetting bounds how far adaptation can drift; it is complementary to, and not
+tested in, our short-horizon study.
+
+\paragraph{Order terms of SGD.} The second-order expansion of sequential SGD steps underlies the
+gradient-alignment interpretation of Reptile and Fish~\citep{nichol2018reptile,shi2022fish}, the implicit
+regularizer of SGD with fixed permutations and its average over orders~\citep{smith2021origin}, and
+data-ordering attacks~\citep{shumailov2021ordering}. \citet{sweeney2026lie} uses the corresponding
+commutator to choose the order of source domains. We use the same term for a different purpose, to select an
+adaptation subspace, and we test that use against controls rather than proposing it as a finding.
+
+\paragraph{Low-dimensional and meta-learned adaptation.} Training and adaptation can often be confined to
+low-dimensional parameter subspaces~\citep{li2018intrinsic,gurari2018tiny}; Tent's normalization parameters
+are themselves a small subset. Meta-learned TTA such as MT3 uses supervised source data at meta-training
+time~\citep{bartler2022mt3}. Our candidate and utility-only control likewise use labelled meta data, so
+neither is fully source-free.

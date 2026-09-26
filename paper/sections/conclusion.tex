@@ -1,0 +1,12 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We asked whether an order penalty adds utility to test-time adaptation when meta supervision, adaptation
+budget and batch membership are held fixed. We tested this in a synthetic, fully auditable model. The model
+includes a utility-only ablation, reduced learning rates, and causal and calibrated update-norm matching.
+The pre-registered rule did not support an added utility. In two of three world seeds the penalty did not
+change the selected projector, so the penalized and unpenalized runs were identical computations; in the
+third seed it changed the projector for the worse. Because the entropy baseline itself did not improve on no
+adaptation, this environment cannot adequately test whether order robustness can be gained without losing
+adaptation gain. We keep the candidate on hold. We report the protocol and the negative diagnostic as they
+are, without extending them to real-image TTA.

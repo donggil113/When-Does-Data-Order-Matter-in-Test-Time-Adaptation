@@ -1,0 +1,20 @@
+\begin{abstract}
+Test-time adaptation (TTA) updates a model online, so its outcome can depend on the order in which the
+test stream arrives. We ask a deliberately narrow question in a controlled synthetic setting: when meta
+supervision, adaptation budget and batch membership are held fixed, does an order penalty add utility? The
+model is a linear softmax classifier whose \res{dim}-dimensional input affine transform
+($2\times\res{dim}$ parameters) is adapted by plain-SGD entropy minimization; we call this an
+entropy-minimization toy baseline rather than Tent. The candidate restricts adaptation to a subspace chosen
+from a discrete pool by trading a supervised utility estimate on labelled meta data against the local
+second-order order-difference term of plain SGD. Controls include a utility-only subspace that shares the
+candidate's meta data, labels, statistics and rank but drops the penalty, two reduced learning rates, and
+two update-norm-matched controls, one of which is causal per step. Over \res{nseeds} synthetic world seeds
+and \res{norders} fixed orders each, with batch membership fixed and only batch order permuted, a
+pre-registered rule returned \emph{order penalty added utility not supported}. The candidate's gain over no
+adaptation was \res{ev.gain.r0}, \res{ev.gain.r1} and \res{ev.gain.r2} percentage points in the three seeds.
+In two seeds the candidate and the utility-only control selected the same projector and learning rate and
+produced identical trajectories; in the third the candidate was worse. The entropy baseline itself did not
+improve on no adaptation here, so this environment cannot adequately evaluate a gain-retention hypothesis.
+The results concern this synthetic implementation only and carry no conclusion about image TTA or order
+regularization in general.
+\end{abstract}

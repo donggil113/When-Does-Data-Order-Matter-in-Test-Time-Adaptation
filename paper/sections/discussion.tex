@@ -1,0 +1,39 @@
+\section{Discussion and Limitations}
+\label{sec:discussion}
+
+\paragraph{What the result does and does not say.} Under matched meta supervision, adaptation budget and
+batch membership, the order penalty did not add utility in this synthetic implementation. Its only
+observable effect was to change the selected subspace in one of three world seeds, and there the change hurt.
+This non-support is not evidence that the penalty has zero effect, and it is not evidence that it is
+equivalent to the controls. It says nothing about order regularization in general or about image-based TTA.
+
+\paragraph{The baseline had no adaptation gain.} The EM-toy baseline was worse than no adaptation on the
+stationary terminal holdout in every seed, and no arm reached the gain MIE. Our hypothesis concerns
+\emph{retaining} adaptation gain while reducing order sensitivity. An environment in which adaptation does
+not help cannot evaluate that hypothesis adequately. This is a design limitation of the environment, not the
+outcome of a formal power analysis, which we did not perform. Choosing an environment in which the baseline
+adapts usefully is left as planned work (Appendix~\ref{app:planned}).
+
+\paragraph{Discrete pool and greedy selection.} The candidate chooses among $2\times\res{dim}$ fixed
+orthonormal pool directions with a greedy, early-stopping rule. With rank $\res{ranks}$ selected everywhere,
+the space of distinct choices was small, which makes coincidence with the utility-only control likely. A
+continuous or larger pool could behave differently; we did not test one.
+
+\paragraph{Learning-rate grid boundary.} The candidate's development-selected learning rate was the grid
+maximum in $\res{ncandbound}$ of $9$ condition--seed pairs. Selecting the upper boundary does not show that
+the optimum was found, and all learning-rate-dependent comparisons inherit this caveat. We kept the grid
+fixed rather than widening it after seeing results.
+
+\paragraph{Few worlds and sampled orders.} There are $\res{nseeds}$ world seeds and $\res{norders}$ sampled
+orders per seed. The worst observed order is not a bound on the risk over all orders. We report per-seed
+paired differences instead of confidence intervals over pooled orders.
+
+\paragraph{Supervised meta access.} The candidate and the utility-only control are fitted with labelled meta
+data under simulated shifts, and development tuning reads development-holdout labels for every tuned arm.
+None of the adapting arms reads test labels, but the subspace arms are not fully source-free, and the meta
+shifts are only assumed to resemble the test shifts.
+
+\paragraph{Model and optimizer scope.} The model is linear with $2\times\res{dim}$ adapted parameters,
+normalization uses fixed source statistics, and the optimizer is plain SGD with a constant learning rate. The
+analysis in Section~\ref{sec:analysis} is local, and we make no statement about Adam, long horizons or
+batch-statistics dynamics.

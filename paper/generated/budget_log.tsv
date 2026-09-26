@@ -1,0 +1,4 @@
+utc	budget	cpu_cap_s	cpu_used_s	peak_rss_mib	wall_s	exit	command
+2026-09-26T22:40:04Z	analysis	600	0.31	40.8	0.53	0	python3 paper/scripts/export_results.py
+2026-09-26T22:41:13Z	analysis	600	0.26	40.9	0.26	0	python3 paper/scripts/export_results.py
+2026-09-26T22:43:31Z	analysis	600	0.26	40.8	0.26	0	python3 paper/scripts/export_results.py

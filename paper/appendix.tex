@@ -1,0 +1,116 @@
+\section{Planned Experiments (NOT RUN)}
+\label{app:planned}
+None of the following has been run. They are listed so that the scope of the present evidence is explicit.
+\begin{itemize}
+\item \textbf{An environment in which adaptation helps (NOT RUN).} Before revisiting any order-robustness
+question, choose a setting in which the entropy baseline improves on no adaptation by more than the MIE on
+held-out data. The current synthetic worlds do not meet this condition. Selecting the new setting is a design
+decision that has not been taken.
+\item \textbf{Real-image TTA (NOT RUN).} The planned protocol is CIFAR-10-C at severity 5 with a pretrained
+network and Tent-style normalization adaptation. It would use the same separation of stationary fixed-batch,
+re-batched and drift conditions. It is blocked: no deep-learning framework, GPU, dataset copy or pretrained
+weights are available in the project environment, and dataset and weight licences have not been verified by a
+human.
+\item \textbf{Remaining pre-registered seeds and orders (NOT RUN).} The original pilot lists five world seeds
+and sixteen orders; this diagnostic used the first three seeds and the first eight orders. Running more of
+them on the \emph{same} candidate is not planned, because the candidate is on hold. We will not try to rescue
+it with seed, $\lambda$, learning-rate or model sweeps.
+\item \textbf{Continuous or larger subspace pools (NOT RUN).} This would test whether the coincidence with
+the utility-only control is an artefact of the eight-direction pool.
+\end{itemize}
+
+\section{Additional Tables}
+\label{app:tables}
+\input{tables/tab_reshuffle}
+\input{tables/tab_drift_online}
+\input{tables/tab_drift_mixture}
+\input{tables/tab_max}
+\input{tables/tab_diag}
+\input{tables/tab_cost}
+
+\clearpage
+\section{Derivation Details and Numerical Checks}
+\label{app:derivation}
+\paragraph{Sign convention.} $U_b(U_a(\theta))$ applies $a$ first. In the code,
+\texttt{two\_step\_order\_difference(theta, a, b)} returns $\theta_{ab}-\theta_{ba}$ with
+$\theta_{ab}=U_b(U_a(\theta))$, which matches Eq.~\eqref{eq:twostep}.
+
+\paragraph{Remainder.} Eq.~\eqref{eq:twostep} requires only that each Hessian be Lipschitz on the relevant
+segment. It follows from the integral form of Taylor's theorem applied to $\nabla L_b$ along
+$[\theta,\theta-\eta g_a]$, and symmetrically for $\nabla L_a$. This is a standard estimate, not a new result.
+For $K$ steps, $\theta_K=\theta-\eta\sum_k g_{\pi_k}+\eta^2\sum_{i<j}H_{\pi_j}g_{\pi_i}+O(\eta^3)$, again under
+local regularity.
+
+\paragraph{Numerical fixtures (implementation checks, not proofs).} The repository tests
+(\texttt{tests/test\_quadratic\_order.py}) cover five cases:
+\begin{enumerate}
+\item On random quadratics, the exact two-step difference matches the second-order term to floating-point
+precision for $\eta\in\{10^{-3},0.05,0.3,1\}$.
+\item On a quartic-perturbed quadratic, the remainder shrinks at an empirical order between 2.8 and 3.2 when
+$\eta$ is expressed in units of the local curvature $L$.
+\item On the same quartic fixture, the relative remainder is below $0.05$ at $\eta L=10^{-3}$ and exceeds
+$0.1$ at $\eta L\approx 0.3$.
+\item A three- and four-step prediction has a remainder of order three.
+\item Only plain SGD is accepted, and stateful optimizers are rejected.
+\end{enumerate}
+The exact-rational and remainder-bound checks run for this draft are reported in
+Appendix~\ref{app:formula-check}.
+
+\section{Information Access and Implementation Details}
+\label{app:access}
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Information used by each arm. No arm reads test-stream or test-holdout labels. Test-stream labels are
+read only by a predict-then-score oracle after the prediction for that sample is committed, and holdout
+labels are read only by the evaluators.}
+\label{tab:access}
+\begin{tabular}{lllll}
+\toprule
+Arm & Meta data & Meta labels & $\eta$ source & Extra information \\
+\midrule
+No adaptation & -- & -- & -- & -- \\
+EM-toy (full affine) & -- & -- & dev.\ grid & -- \\
+EM-toy, lr$\times$0.3 / $\times$0.1 & -- & -- & EM-toy $\eta\times$ factor & -- \\
+Candidate & yes & yes & dev.\ grid & -- \\
+Utility-only & same as candidate & same & dev.\ grid & candidate's rank \\
+Per-step norm-matched & -- & -- & (direction only) & candidate's step-$t$ norm, lockstep \\
+Global norm-matched & -- & -- & calibration bisection & candidate's mean displacement \\
+\bottomrule
+\end{tabular}
+\end{table}
+Development tuning reads development-holdout labels for all tuned arms, and this is recorded in the cost
+ledger. The calibration of the global control reads no labels. The causal per-step control computes the
+candidate's update on the same batch at the same step, so it cannot read future steps. Its replica's gradient
+cost is charged to the control, and a post-hoc audit found the replica's per-step norms equal to the recorded
+candidate run on every order.
+
+\section{Reproducibility Details and Deviations}
+\label{app:repro}
+\begin{itemize}
+\item \textbf{Frozen configuration.} \texttt{configs/stage2\_order\_penalty\_diagnostic.json} (stage and
+decision rule), \texttt{configs/stage2\_stationary\_fixed\_batches.json},
+\texttt{configs/stage2\_drift\_fixed\_batches.json} and \texttt{configs/stage2\_stationary\_reshuffle.json}.
+All were committed before the run.
+\item \textbf{Raw outputs.} \texttt{runs/stage2\_order\_penalty\_0119a34/}, containing the stage summary and
+manifest, and for each condition \texttt{raw\_log.jsonl}, \texttt{summary.json} and \texttt{manifest.json}.
+\item \textbf{Design changes before this run.} An earlier plan (two toy pilot configurations with re-formed
+batches and a pooled-bootstrap decision rule) was never run. Before the run we made the following changes:
+\begin{itemize}
+\item added the utility-only control;
+\item fixed batch membership for the primary comparisons;
+\item made per-step norm matching causal and removed label reads from calibration;
+\item replaced the pooled bootstrap with per-seed paired differences.
+\end{itemize}
+A separate code-path smoke run on a smaller world is recorded in \texttt{runs/cpu\_smoke\_b7edd9f/}. It
+predates these changes and is not evidence.
+\item \textbf{Display names.} Arm identifiers in logs and configurations are unchanged; for example,
+\texttt{tent\_full} is displayed as EM-toy.
+\end{itemize}
+
+\section{Formula Checks for This Draft}
+\label{app:formula-check}
+\draftnote{PENDING in v0: an exact-rational check of Eq.~\eqref{eq:twostep} for quadratics and a numerical
+check of the stated remainder bound on quartic fixtures are run after this version is saved; results will be
+inserted here.}

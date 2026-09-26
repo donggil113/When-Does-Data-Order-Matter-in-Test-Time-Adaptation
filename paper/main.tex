@@ -1,0 +1,49 @@
+\documentclass{article} % For LaTeX2e
+% Official ICLR 2027 style files (unmodified copies in iclr2027/, see BUILD.md for source and hashes).
+\usepackage{iclr2027_conference,times}
+
+% Optional math commands shipped with the official template.
+\input{math_commands.tex}
+
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+
+% Every reported number comes from paper/generated/numbers.tex, which is produced from the raw run files by
+% paper/scripts/export_results.py. \res{key} stops the build if a key is missing.
+\input{generated/numbers.tex}
+\newcommand{\res}[1]{\ifcsname res@#1\endcsname\csname res@#1\endcsname\else
+  \errmessage{Undefined result key: #1}\fi}
+\newcommand{\draftnote}[1]{\textbf{[#1]}}
+
+\title{Order Sensitivity and Adaptation Utility\\in a Controlled Test-Time Adaptation Model}
+
+% Anonymous: the official style prints "Anonymous authors" while \iclrfinalcopy is not set.
+\author{Anonymous authors}
+
+\begin{document}
+
+\maketitle
+% The official style sets the running head to "Under review as a conference paper at ICLR 2027" when
+% \iclrfinalcopy is not set. This draft has NOT been submitted, so the head is overridden here (document
+% level only; the style file itself is unmodified).
+\lhead{Internal working draft v0 --- not submitted to any venue}
+
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related}
+\input{sections/setting}
+\input{sections/analysis}
+\input{sections/experiments}
+\input{sections/discussion}
+\input{sections/conclusion}
+\input{sections/statements}
+
+\bibliography{references}
+\bibliographystyle{iclr2027_conference}
+
+\appendix
+\input{appendix}
+
+\end{document}

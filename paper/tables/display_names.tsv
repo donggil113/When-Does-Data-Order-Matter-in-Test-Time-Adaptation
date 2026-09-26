@@ -1,0 +1,9 @@
+arm_id	display_name	macro_key
+no_adapt	No adaptation	noad
+tent_full	EM-toy (full affine)	full
+tent_full_lr_x0.3	EM-toy, lr $\times$0.3	lrA
+tent_full_lr_x0.1	EM-toy, lr $\times$0.1	lrB
+tent_orderaware	Order-penalized subspace (candidate)	cand
+tent_utility_only	Utility-only subspace	util
+norm_matched_per_step_causal	Per-step norm-matched (causal)	nstep
+norm_matched_global	Global norm-matched (calibrated)	nglob

@@ -1,0 +1,52 @@
+\section{Method under Study}
+\label{sec:analysis}
+
+\paragraph{Order difference of two plain-SGD steps (standard).} Let $U_a(\theta)=\theta-\eta\nabla L_a(\theta)$
+and write $g_a=\nabla L_a(\theta)$ and $H_a=\nabla^2 L_a(\theta)$ at the common starting point $\theta$.
+Applying $a$ then $b$ gives
+\begin{equation}
+U_b(U_a(\theta)) = \theta-\eta g_a-\eta\,\nabla L_b(\theta-\eta g_a).
+\label{eq:composition}
+\end{equation}
+If $\nabla^2 L_b$ is $M_b$-Lipschitz on the segment $[\theta,\theta-\eta g_a]$, Taylor's theorem gives
+$\nabla L_b(\theta-\eta g_a)=g_b-\eta H_b g_a+\rho_b$ with $\|\rho_b\|\le \tfrac{M_b}{2}\eta^2\|g_a\|^2$.
+The symmetric statement holds for $\rho_a$ on $[\theta,\theta-\eta g_b]$. Subtracting the reversed order,
+\begin{equation}
+U_b(U_a(\theta))-U_a(U_b(\theta)) = \eta^2\left(H_b g_a - H_a g_b\right) - \eta(\rho_b-\rho_a),
+\qquad \|\eta(\rho_b-\rho_a)\|\le \tfrac{\eta^3}{2}\left(M_b\|g_a\|^2+M_a\|g_b\|^2\right).
+\label{eq:twostep}
+\end{equation}
+For quadratic losses the Hessians are constant ($M_a=M_b=0$), so the second-order term is the \emph{exact}
+two-step difference for every $\eta$. For smooth non-quadratic losses it is only the leading term, and
+Eq.~\eqref{eq:twostep} is informative only when $\eta$ times the local curvature is small. Our numerical
+fixtures show a relative remainder above $0.1$ at $\eta L\approx 0.3$ (Appendix~\ref{app:derivation}).
+Eq.~\eqref{eq:twostep} is a restatement of a known expansion~\citep{nichol2018reptile,smith2021origin,sweeney2026lie}.
+It says nothing about adaptive optimizers, long-horizon stability or generalization, and we do not use it
+as a guarantee. For $K$ steps in order $\pi$ the analogous leading term is
+$\eta^2\sum_{i<j}H_{\pi_j}g_{\pi_i}$; for $K\ge 3$ it has cubic corrections even for quadratics.
+
+\paragraph{Candidate: order-penalized adaptation subspace.} For an orthonormal $P_S$ spanning a subspace
+$S$, projected SGD replaces $g$ by $P_SP_S^\top g$. The candidate chooses $S$ at $\theta_0$ from a discrete
+pool of $2\times\res{dim}$ orthonormal directions. The pool consists of the eigenvectors of the uncentred
+second moment of meta-batch entropy gradients, completed by coordinate axes. On $8$ single-domain meta batches
+$a$ we compute the entropy gradient $g_a$, the supervised cross-entropy gradient $s_a$ (this requires meta
+labels), entropy Hessian-vector products $H_a p_j$, and output Jacobian-vector products $Jp_j$ of the class
+probabilities on $96$ meta probe points, all by finite differences where needed. The fitter scores
+\begin{equation}
+\mathrm{score}(S)=\frac{\operatorname{mean}_a\langle P_S s_a,P_S g_a\rangle}{G_{\mathrm{ref}}}
+-\lambda\sqrt{\frac{\operatorname{mean}_{a\neq b}\|J P_S(H_bP_Sg_a-H_aP_Sg_b)\|^2}
+{\operatorname{mean}_{a\neq b}\|J(H_bg_a-H_ag_b)\|^2}},
+\label{eq:score}
+\end{equation}
+where $G_{\mathrm{ref}}=\sum_j\max(0,\text{gain}(\{p_j\}))$ is the largest first-order supervised gain any pool
+subset attains. The first term is the retained fraction of first-order usefulness. The second is $\lambda$
+times the retained fraction of the output-level second-order order term of Eq.~\eqref{eq:twostep}, restricted
+to $S$. Directions are added greedily up to $k_{\max}=4$, and only while they increase the score; this
+early stop sets the candidate's rank. We fixed $\lambda=1$ and $k_{\max}=4$ in advance and did not tune them.
+
+\paragraph{Utility-only ablation.} The utility-only control reuses the same pool, meta batches, labels and
+statistics, sets $\lambda=0$, and takes exactly as many directions as the candidate selected. Because the
+utility term is additive over orthonormal pool directions, this is the top-$k$ set by per-direction
+supervised gain. The two arms therefore differ only through the penalty's effect on \emph{which} directions
+are selected. When they select the same directions and the development split selects the same $\eta$, the
+two runs are the same deterministic computation and must coincide.

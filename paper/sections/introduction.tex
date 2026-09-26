@@ -1,0 +1,48 @@
+\section{Introduction}
+\label{sec:intro}
+
+Fully test-time adaptation updates a pretrained model on unlabelled test batches as they arrive, for
+example by minimizing prediction entropy over normalization parameters~\citep{wang2021tent}. Because every
+update depends on the parameters left by the previous one, the final model is a function of the order of
+the stream. Order dependence is not new: temporally correlated or non-i.i.d.\ streams degrade several TTA
+methods~\citep{gong2022note,yuan2023rotta,niu2023sar,zhao2023pitfalls}, reordering alone changes results
+in continual settings~\citep{wang2022cotta,dobler2023rmt,gao2023dda}, and resetting schemes are used to
+contain long-horizon drift~\citep{press2023rdumb,niu2023sar,lim2026asr,hoang2024petta}. For plain SGD the
+leading order-dependent term is also known: two consecutive steps on losses $L_a$ and $L_b$ differ from the
+reversed order by $\eta^2(H_b g_a - H_a g_b)$ up to $O(\eta^3)$, a consequence of Taylor expansion that
+appears in the analyses of Reptile, of implicit regularization in SGD and of data-ordering
+attacks~\citep{nichol2018reptile,smith2021origin,shumailov2021ordering}, and more recently as a predictor
+of curriculum order~\citep{sweeney2026lie}.
+
+A natural idea is therefore to \emph{penalize} that term: restrict adaptation to directions along which
+the local order difference, measured on model outputs, is small. Whether such a penalty is useful is an
+empirical question, and it is easy to answer it wrongly. A restricted subspace moves less, uses extra
+supervision if it is fitted on labelled data, and can change batch composition effects when orders are
+formed by reshuffling samples. Any of these can reduce order sensitivity without the penalty playing a
+role. This paper reports a controlled diagnostic of exactly this confound structure.
+
+\paragraph{Question.} With the same meta supervision, the same adaptation budget and the same batch
+membership, does an order penalty add utility over (i) a utility-only subspace that differs from the
+candidate only by the penalty, (ii) simply using a smaller learning rate, and (iii) matching the size of
+each update?
+
+\paragraph{What we do.} We build a small synthetic TTA model in which every relevant quantity can be
+controlled and audited (Section~\ref{sec:setting}): a linear softmax classifier with an adapted input affine
+transform, a stream replayed in fixed orders whose batch membership is fixed so that only batch order
+varies, a common terminal holdout for stationary streams, and current-regime holdouts plus
+predict-then-update online error for genuine drift. The candidate and all controls are tuned on the same
+development split with the same grid. The decision rule, seeds and minimum effects of interest were fixed
+and committed before the run, and every reported number is exported programmatically from the raw run files.
+
+\paragraph{What we find.} The pre-registered rule returned \emph{order penalty added utility not
+supported} (Section~\ref{sec:experiments}). In two of three world seeds the penalized and the utility-only
+fitters selected the same two pool directions and the same learning rate, which makes their trajectories
+identical by construction; in the third seed the two differed and the candidate was worse. The
+entropy-minimization baseline did not improve on no adaptation in this environment, which limits what the
+environment can say about retaining adaptation gain.
+
+\paragraph{Scope of the contribution.} We do not claim new theory: the order-difference expansion is
+standard and we restate it only to define the candidate (Section~\ref{sec:analysis}). We do not claim
+evidence about real-image TTA; no real data were used. The contribution is a controlled protocol, with
+its controls and audits, and a negative diagnostic result reported together with the implementation-level
+reason for it.
