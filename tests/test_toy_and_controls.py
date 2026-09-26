@@ -7,8 +7,8 @@ import unittest
 
 from ordertta import linalg as la
 from ordertta.evaluator import NonTerminalEvaluationError, TerminalHoldoutEvaluator, pairwise_output_difference
-from ordertta.methods import (EntropySGD, NoAdapt, calibrate_lr_to_displacement, per_step_norm_schedule,
-                              small_lr)
+from ordertta.methods import (CausalNormReference, EntropySGD, FutureTraceAccessError, NoAdapt,
+                              calibrate_lr_to_displacement, per_step_norm_schedule, small_lr)
 from ordertta.replay import IntegrityError, ReplayLoader, make_orders
 from ordertta.subspace import random_subspace
 from ordertta.toy import build_world, train_source_model
@@ -155,6 +155,25 @@ class Controls(unittest.TestCase):
         short = EntropySGD(copy.deepcopy(model), "ctrl", 0.5, None, norms[:1])
         with self.assertRaises(IndexError):
             _replay(short, world, samples, o, ev)
+
+    def test_causal_norm_reference_reads_no_future_steps(self):
+        world, model, samples, ev = _setup()
+        o = make_orders(world.ids("test_stream"), "uniform_permutation", [2])[0]
+        sub = random_subspace(model.theta_dim, 2, 0)
+        cand = EntropySGD(copy.deepcopy(model), "cand", 0.5, sub)
+        _replay(cand, world, samples, o, ev)
+        ref = CausalNormReference(EntropySGD(copy.deepcopy(model), "cand", 0.5, sub))
+        ctrl = EntropySGD(copy.deepcopy(model), "ctrl", 0.5, None, norm_reference=ref)
+        _replay(ctrl, world, samples, o, ev)
+        for r, c in zip(ctrl.trace, cand.trace):  # same numbers as the old full-trace control, but causal
+            self.assertAlmostEqual(r.update_norm, c.update_norm, delta=1e-12)
+        self.assertEqual(ctrl.total_grad_evals(), ctrl.model.grad_evals + ref.grad_evals)
+        self.assertGreater(ref.grad_evals, 0)
+        early = CausalNormReference(EntropySGD(copy.deepcopy(model), "cand", 0.5, sub))
+        loader = ReplayLoader(samples, world.ids("test_stream"), o, 8)
+        batches = list(loader)
+        with self.assertRaises(FutureTraceAccessError):
+            early.norm_for(batches[1])  # step 1 requested while step 0 is current
 
     def test_global_calibration_hits_target_and_reports_mismatch(self):
         res = calibrate_lr_to_displacement(lambda lr: 3.0 * lr, 0.6, 1e-4, 10.0, iters=60)

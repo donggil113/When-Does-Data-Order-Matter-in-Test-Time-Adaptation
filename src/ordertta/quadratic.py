@@ -5,17 +5,22 @@ Scope (deliberately narrow):
   * a small number of steps from a common starting point;
   * smooth losses whose Hessian is available (exactly, or analytically).
 
-Known expansion (Taylor; see docs/prior_art.md, e.g. Reptile/Nichol et al. 2018 and
-Smith et al. 2021): for losses L_1..L_K applied in the order pi,
+Two separate, already-known statements (see docs/prior_art.md: Reptile/Nichol et al. 2018,
+Smith et al. 2021, Sweeney 2026); the tests here verify the implementation, they are not new theory.
 
-    theta_K = theta - eta * sum_k g_k + eta^2 * sum_{i<j} H_{pi_j} g_{pi_i} + O(eta^3),
+(1) Quadratic losses, two plain-SGD steps from theta (g, H at theta): exactly, for every eta,
 
-with all g, H evaluated at the common starting point theta. For two steps,
+    theta_ab - theta_ba = eta^2 (H_b g_a - H_a g_b).
+
+(2) Smooth non-quadratic losses: the same expression is only the leading term,
 
     theta_ab - theta_ba = eta^2 (H_b g_a - H_a g_b) + O(eta^3),
 
-and for quadratics the two-step identity is exact (gradients are affine). Nothing in
-this module says anything about adaptive optimisers or long-horizon stability.
+and more generally theta_K = theta - eta sum_k g_k + eta^2 sum_{i<j} H_{pi_j} g_{pi_i} + O(eta^3)
+(for K >= 3 this has cubic terms even for quadratics). The remainder is small only when
+eta * (local curvature) << 1; at eta * L ~ 0.3 it can be comparable to the leading term.
+
+Nothing here extends to Adam or other stateful optimisers, long-horizon stability, or generalisation.
 """
 
 from __future__ import annotations

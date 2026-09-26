@@ -172,7 +172,8 @@ class MetaBatchStats:
 
 def order_aware_subspace(pool: Matrix, batches: Sequence[MetaBatchStats], output_jvp_pool: Sequence[Vector],
                          k: int, lr: float, lam: float, min_improvement: float = 1e-15,
-                         normalized: bool = False) -> AdaptationSubspace:
+                         normalized: bool = False, force_k: bool = False,
+                         name_prefix: str = "orderaware") -> AdaptationSubspace:
     """Greedy subset (at most k directions) of the orthonormal ``pool`` maximising
 
         score(S) = lr * gain(S) - lam * lr^2 * sqrt(order(S))
@@ -196,6 +197,8 @@ def order_aware_subspace(pool: Matrix, batches: Sequence[MetaBatchStats], output
     A direction is added only if it raises the score by more than ``min_improvement`` over the current
     set (the empty set scores 0), so the result can have fewer than k directions -- possibly none, which
     is equivalent to not adapting and is reported as such rather than padded with useless directions.
+    ``force_k=True`` disables that stop and always returns min(k, len(pool)) directions (used for the
+    rank-matched utility-only control).
     """
     m = len(pool)
     if not batches or len(batches) < 2:
@@ -251,7 +254,7 @@ def order_aware_subspace(pool: Matrix, batches: Sequence[MetaBatchStats], output
             s = score(chosen + [j])
             if best_s is None or s["score"] > best_s["score"]:
                 best, best_s = j, s
-        if best_s["score"] <= current + min_improvement:
+        if not force_k and best_s["score"] <= current + min_improvement:
             stopped = "no_improving_direction"
             trace.append({"rejected": best, **best_s})
             break
@@ -259,15 +262,23 @@ def order_aware_subspace(pool: Matrix, batches: Sequence[MetaBatchStats], output
         current = best_s["score"]
         trace.append({"picked": best, **best_s})
     basis = [list(pool[j]) for j in chosen]
-    return AdaptationSubspace(f"orderaware_k{len(chosen)}of{k}_lam{lam:g}", basis, len(pool[0]),
+    return AdaptationSubspace(f"{name_prefix}_k{len(chosen)}of{k}_lam{lam:g}", basis, len(pool[0]),
                               {"fitter": "order_aware_subspace", "k_max": k, "k": len(chosen), "lam": lam,
-                               "lr": lr, "normalized": normalized, "pool_gain": ref["gain"],
+                               "lr": lr, "normalized": normalized, "force_k": force_k, "pool_gain": ref["gain"],
                                "attainable_gain": g_ref, "pool_order": ref["order"],
                                "chosen_pool_indices": chosen, "greedy_trace": trace,
                                "stopped": stopped, "n_meta_batches": len(batches)})
 
+def utility_only_subspace(pool: Matrix, batches: Sequence[MetaBatchStats], output_jvp_pool: Sequence[Vector],
+                          k: int) -> AdaptationSubspace:
+    """Order-penalty ablation: the same pool, meta statistics (incl. meta labels) and utility term as the
+    order-aware fitter, with lam = 0 and exactly k directions (k = the candidate's realised rank)."""
+    sub = order_aware_subspace(pool, batches, output_jvp_pool, k, lr=1.0, lam=0.0, normalized=True,
+                               force_k=True, name_prefix="utilityonly")
+    sub.provenance["fitter"] = "utility_only_subspace"
+    return sub
 
 
 __all__ = ["CostRecord", "CostLedger", "AdaptationSubspace", "full_space", "random_subspace",
-           "gradient_pca_subspace", "order_aware_subspace", "MetaBatchStats", "complete_basis",
-           "top_eigenvectors"]
+           "gradient_pca_subspace", "order_aware_subspace", "utility_only_subspace", "MetaBatchStats",
+           "complete_basis", "top_eigenvectors"]

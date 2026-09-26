@@ -1,0 +1,67 @@
+{
+ "stage": "stage2_order_penalty_diagnostic",
+ "frozen_utc": "2026-09-26",
+ "question": "Under the same meta supervision and adaptation budget, does the order penalty add utility?",
+ "conditions": [
+  {
+   "name": "stationary_fixed_batches",
+   "role": "primary_stationary",
+   "config": "configs/stage2_stationary_fixed_batches.json",
+   "primary_metric": "terminal_error"
+  },
+  {
+   "name": "drift_fixed_batches",
+   "role": "primary_drift",
+   "config": "configs/stage2_drift_fixed_batches.json",
+   "primary_metric": "regime_end_error_mean",
+   "separately_reported": [
+    "online_error",
+    "terminal_regime_error",
+    "terminal_error (mixture; not penalised)"
+   ]
+  },
+  {
+   "name": "stationary_reshuffle",
+   "role": "secondary",
+   "config": "configs/stage2_stationary_reshuffle.json",
+   "primary_metric": "terminal_error"
+  }
+ ],
+ "budget": {
+  "max_cpu_seconds_total": 3600,
+  "reserve_cpu_seconds": 120,
+  "rlimit_grace_seconds": 5,
+  "max_address_space_bytes": 3221225472,
+  "workers": 1,
+  "threads": 1
+ },
+ "decision": {
+  "rule": "ordertta.analysis.decide_stage",
+  "candidate": "tent_orderaware",
+  "no_adapt": "no_adapt",
+  "baseline": "tent_full",
+  "required_controls": [
+   "tent_utility_only",
+   "tent_full_lr_x0.3",
+   "tent_full_lr_x0.1",
+   "norm_matched_per_step_causal",
+   "norm_matched_global"
+  ],
+  "drift_reference": "tent_utility_only",
+  "mie": {
+   "spread_abs": 0.005,
+   "gain_abs": 0.01
+  },
+  "tolerance": {
+   "spread_abs": 0.0025,
+   "gain_abs": 0.005
+  },
+  "n_seeds": 3,
+  "labels": {
+   "INCOMPLETE": "any required arm non-OK in a primary condition (failure, cap, NOT_RUN) or missing paired rows",
+   "ORDER_PENALTY_ADDED_UTILITY_NOT_SUPPORTED": "any of: stationary gain vs no_adapt seed-mean < MIE or <= 0 in some seed; std-over-orders reduction vs tent_full seed-mean < MIE or <= 0 in some seed; some required control not dominated (better on mean error or std by MIE with the same sign in all 3 seeds, and not worse than tolerance on the other axis); drift regime-end or online error worse than utility-only by more than tolerance, or below no_adapt",
+   "REALDATA_PILOT_CANDIDATE": "none of the above; a flag for a later, separately approved pilot only"
+  },
+  "no_rescue": "if not supported: no lambda/seed/model sweep; further training of this candidate is paused"
+ }
+}

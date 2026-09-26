@@ -1,0 +1,293 @@
+{
+ "run_type": "toy_diagnostic",
+ "description": "Stage 2 primary (stationary): batch membership fixed once, only the batch order differs across orders.",
+ "derived_from": "configs/pilot_toy_stationary.json (world, model, order_aware subspace, lr grid, MIE unchanged)",
+ "world": {
+  "seed": 0,
+  "dim": 4,
+  "n_classes": 3,
+  "class_sep": 1.6,
+  "sigma": 1.0,
+  "n_test_domains": 4,
+  "n_val_domains": 2,
+  "n_meta_domains": 4,
+  "scale_range": [
+   0.5,
+   1.6
+  ],
+  "shift_sd": 0.8,
+  "domain_noise": 0.1,
+  "n_per_class": {
+   "source_train": 100,
+   "meta_train": 24,
+   "development": 20,
+   "dev_holdout": 30,
+   "calibration": 20,
+   "test_stream": 40,
+   "test_holdout": 50
+  }
+ },
+ "replicate_seeds": [
+  0,
+  1,
+  2
+ ],
+ "model": {
+  "norm": "source",
+  "source_epochs": 200,
+  "source_lr": 0.5
+ },
+ "stream": {
+  "batch_size": 16,
+  "order_family": "batch_permutation",
+  "order_seeds": [
+   1000,
+   1001,
+   1002,
+   1003,
+   1004,
+   1005,
+   1006,
+   1007
+  ],
+  "domain_sequences": null,
+  "eval_batch_size": 100,
+  "partition_seed": 5000
+ },
+ "prequential": true,
+ "subspaces": {
+  "order_aware": {
+   "fitter": "order_aware",
+   "k": 4,
+   "lam": 1.0,
+   "normalized": true,
+   "n_meta_batches": 8,
+   "meta_batch_size": 16,
+   "n_probe": 96,
+   "seed": 0
+  },
+  "utility_only": {
+   "fitter": "utility_only",
+   "of": "order_aware"
+  }
+ },
+ "tuning": {
+  "enabled": true,
+  "lr_grid": [
+   0.05,
+   0.1,
+   0.2,
+   0.5,
+   1.0,
+   2.0
+  ],
+  "order_seeds": [
+   2000,
+   2001,
+   2002,
+   2003
+  ],
+  "split": "development",
+  "holdout": "dev_holdout",
+  "metric": "mean_terminal_error"
+ },
+ "methods": [
+  {
+   "name": "no_adapt",
+   "kind": "no_adapt"
+  },
+  {
+   "name": "tent_full",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "lr": "tune"
+  },
+  {
+   "name": "tent_full_lr_x0.3",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "lr_from": "tent_full",
+   "lr_factor": 0.3,
+   "control_of": "tent_full"
+  },
+  {
+   "name": "tent_full_lr_x0.1",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "lr_from": "tent_full",
+   "lr_factor": 0.1,
+   "control_of": "tent_full"
+  },
+  {
+   "name": "tent_orderaware",
+   "kind": "entropy_sgd",
+   "subspace": "order_aware",
+   "lr": "tune"
+  },
+  {
+   "name": "tent_utility_only",
+   "kind": "entropy_sgd",
+   "subspace": "utility_only",
+   "lr": "tune",
+   "control_of": "tent_orderaware"
+  },
+  {
+   "name": "norm_matched_per_step_causal",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "control_of": "tent_orderaware",
+   "norm_match": {
+    "mode": "per_step_causal",
+    "target": "tent_orderaware"
+   }
+  },
+  {
+   "name": "norm_matched_global",
+   "kind": "entropy_sgd",
+   "subspace": null,
+   "control_of": "tent_orderaware",
+   "norm_match": {
+    "mode": "calibrated_global",
+    "target": "tent_orderaware",
+    "lr_lo": 0.0001,
+    "lr_hi": 20.0,
+    "iters": 40,
+    "max_relative_mismatch": 0.05,
+    "calibration_order_seeds": [
+     3000,
+     3001,
+     3002,
+     3003
+    ]
+   }
+  }
+ ],
+ "decision": {
+  "mode": "seedwise_v2",
+  "candidate": "tent_orderaware",
+  "baseline": "tent_full",
+  "no_adapt": "no_adapt",
+  "stability_controls": [
+   "tent_utility_only",
+   "tent_full_lr_x0.3",
+   "tent_full_lr_x0.1",
+   "norm_matched_per_step_causal",
+   "norm_matched_global"
+  ],
+  "dimension_controls": [],
+  "spread_metric": "std_over_orders",
+  "mie": {
+   "spread_abs": 0.005,
+   "gain_abs": 0.01
+  },
+  "tolerance": {
+   "spread_abs": 0.0025,
+   "gain_abs": 0.005
+  }
+ },
+ "resource_cap": {
+  "max_cpu_seconds": 3600,
+  "max_test_time_gradient_evals": 400000
+ },
+ "preregistration": {
+  "frozen_utc": "2026-09-26",
+  "status": "FROZEN_BEFORE_RUN",
+  "stage": "stage2_order_penalty_diagnostic",
+  "condition": "stationary_fixed_batches",
+  "question": "Under the same meta supervision and adaptation budget, does the order penalty add utility?",
+  "primary_metric": "terminal common-holdout error after full replay",
+  "spread_metric": "std_over_orders",
+  "mie": {
+   "spread_abs": 0.005,
+   "gain_abs": 0.01
+  },
+  "tolerance": {
+   "spread_abs": 0.0025,
+   "gain_abs": 0.005
+  },
+  "seeds": {
+   "replicate_seeds": [
+    0,
+    1,
+    2
+   ],
+   "order_seeds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007
+   ],
+   "tuning_order_seeds": [
+    2000,
+    2001,
+    2002,
+    2003
+   ],
+   "calibration_order_seeds": [
+    3000,
+    3001,
+    3002,
+    3003
+   ],
+   "partition_seed": 5000,
+   "subspace_seed": 0,
+   "selection": "first 3 of the pre-registered replicate seeds [0..4] and first 8 of the pre-registered order seeds [1000..1015]; not chosen by performance",
+   "independence": "3 seeds are the only independent units; orders are nested in seeds"
+  },
+  "tuning_range": {
+   "lr_grid": [
+    0.05,
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    2.0
+   ],
+   "tuned_arms": [
+    "tent_full",
+    "tent_orderaware",
+    "tent_utility_only"
+   ],
+   "selection": "min mean_terminal_error on development/dev_holdout over tuning orders; ties -> smaller lr",
+   "equal_budget": "same grid, same tuning orders, same steps for every tuned arm",
+   "fixed_not_tuned": {
+    "order_aware.lam (normalized)": 1.0,
+    "order_aware.k_max": 4,
+    "small_lr_factors": [
+     0.3,
+     0.1
+    ]
+   },
+   "not_widened": "grid identical to configs/pilot_toy_*.json"
+  },
+  "resource_cap": {
+   "stage_cpu_seconds_total_incl_tuning_and_children": 3600,
+   "address_space_bytes": 3221225472,
+   "workers": 1,
+   "threads": 1
+  },
+  "splits": {
+   "source_train": "labelled source; trains frozen (W, b)",
+   "meta_train": "source-distribution samples under simulated shifts M*; subspace fitting only; labels used by order_aware (supervised gain term), not by gradpca/random",
+   "development": "validation shifts V*; lr tuning stream",
+   "dev_holdout": "validation shifts V*; tuning terminal evaluation (and calibration evaluation protocol)",
+   "calibration": "validation shifts V*; stream for global update-norm calibration",
+   "test_stream": "test shifts T*; the replayed multiset (labels read only by the prequential scorer)",
+   "test_holdout": "test shifts T*; common terminal holdout (labels read only by the terminal evaluator)"
+  },
+  "information_parity": {
+   "tent_orderaware": "meta_train inputs+labels (utility term), meta pool/HVP/JVP, order penalty lam=1",
+   "tent_utility_only": "identical meta batches, labels, pool, HVP/JVP; lam=0; rank = candidate rank",
+   "norm_matched_per_step_causal": "candidate's step-t update norm from a lockstep replica (steps <= t only)",
+   "norm_matched_global": "candidate's mean terminal displacement on the calibration split; no labels read",
+   "small_lr": "tent_full tuned lr x 0.3 / x 0.1",
+   "no_adapt": "source model"
+  },
+  "previously_viewed": "no pilot-world test data has been evaluated before this stage; the smoke run and unit tests used differently specified worlds",
+  "decision_rule": "ordertta.analysis.decide_stage (see configs/stage2_order_penalty_diagnostic.json)"
+ }
+}

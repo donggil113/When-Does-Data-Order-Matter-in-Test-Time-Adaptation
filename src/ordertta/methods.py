@@ -75,8 +75,43 @@ class Adapter:
     def displacement(self) -> float:
         return la.norm(la.sub(self.theta, self.theta0))
 
+    def path_length(self) -> float:
+        return math.fsum(r.update_norm for r in self.trace)
+
+    def total_grad_evals(self) -> int:
+        """Gradient evaluations charged to this arm (including any reference computation)."""
+        return self.model.grad_evals
+
     def step(self, batch: Batch) -> StepRecord:  # pragma: no cover - interface
         raise NotImplementedError
+
+
+class FutureTraceAccessError(RuntimeError):
+    """A norm-matched control asked for a reference step other than the current one."""
+
+
+class CausalNormReference:
+    """Reveals the target arm's update norm for step t only while step t is being taken.
+
+    A fresh replica of the target adapter (same start, lr and subspace) is advanced on the same batch
+    at the same time as the control, so the control can only see norms from steps <= t. Its gradient
+    evaluations are charged to the control.
+    """
+
+    def __init__(self, reference: Adapter):
+        self.reference = reference
+        self._next = 0
+
+    def norm_for(self, batch: Batch) -> float:
+        if batch.step != self._next:
+            raise FutureTraceAccessError(f"requested reference step {batch.step}, current step is {self._next}")
+        rec = self.reference.step(batch)
+        self._next += 1
+        return rec.update_norm
+
+    @property
+    def grad_evals(self) -> int:
+        return self.reference.model.grad_evals
 
 
 class NoAdapt(Adapter):
@@ -97,29 +132,42 @@ class EntropySGD(Adapter):
     def __init__(self, model: LinearTTAModel, name: str, lr: float,
                  subspace: Optional[AdaptationSubspace] = None,
                  step_norms: Optional[Sequence[float]] = None,
-                 control_of: Optional[str] = None, subspace_fit_uses_source_labels: bool = False):
+                 control_of: Optional[str] = None, subspace_fit_uses_source_labels: bool = False,
+                 norm_reference: Optional[CausalNormReference] = None):
         super().__init__(model)
         if lr < 0 or not math.isfinite(lr):
             raise ValueError("lr must be finite and non-negative")
+        if step_norms is not None and norm_reference is not None:
+            raise ValueError("use either a precomputed norm schedule or a causal reference, not both")
         self.lr = lr
         self.subspace = subspace
         self.step_norms = list(step_norms) if step_norms is not None else None
+        self.norm_reference = norm_reference
         dim = subspace.dim if subspace is not None else model.theta_dim
         self.card = MethodCard(name, "entropy_sgd", n_adapted_params=model.theta_dim, effective_dim=dim,
                                lr=lr, control_of=control_of,
                                subspace_fit_uses_source_labels=subspace_fit_uses_source_labels,
                                notes=(f"subspace={subspace.name}" if subspace else "full space")
-                               + ("; per-step update norms copied from target" if step_norms is not None else ""))
+                               + ("; per-step update norms copied from target" if step_norms is not None else "")
+                               + ("; per-step update norms from a lockstep (causal) replica of the target"
+                                  if norm_reference is not None else ""))
+
+    def total_grad_evals(self) -> int:
+        extra = self.norm_reference.grad_evals if self.norm_reference is not None else 0
+        return self.model.grad_evals + extra
 
     def step(self, batch: Batch) -> StepRecord:
         obj, g = self.model.entropy_and_grad(batch.xs, self.theta)
         u = self.subspace.project(g) if self.subspace is not None else g
         upd = la.scale(u, -self.lr)
         target = None
-        if self.step_norms is not None:
+        if self.norm_reference is not None:
+            target = self.norm_reference.norm_for(batch)
+        elif self.step_norms is not None:
             if batch.step >= len(self.step_norms):
                 raise IndexError("norm schedule shorter than the stream")
             target = self.step_norms[batch.step]
+        if target is not None:
             n = la.norm(upd)
             upd = la.scale(upd, target / n) if n > 0 else la.zeros(len(upd))
         self.theta = la.add(self.theta, upd)
@@ -181,5 +229,6 @@ def calibrate_lr_to_displacement(mean_displacement_at: Callable[[float], float],
     return CalibrationResult(best[0], best[1], target, hist)
 
 
-__all__ = ["MethodCard", "StepRecord", "Adapter", "NoAdapt", "EntropySGD", "small_lr",
+__all__ = ["MethodCard", "StepRecord", "Adapter", "NoAdapt", "EntropySGD", "small_lr", "CausalNormReference",
+           "FutureTraceAccessError",
            "per_step_norm_schedule", "CalibrationResult", "calibrate_lr_to_displacement"]

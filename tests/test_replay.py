@@ -48,6 +48,32 @@ class Orders(unittest.TestCase):
         with self.assertRaises(ValueError):
             make_orders(list(samples), "domain_blocked", [0], dom, [["C", "A"]])
 
+    def test_fixed_batch_membership_only_order_changes(self):
+        samples, _ = _world(40)
+        orders = make_orders(list(samples), "batch_permutation", [1, 2, 3], batch_size=8, partition_seed=9)
+        memberships = {frozenset(frozenset(b) for b in o.batches) for o in orders}
+        self.assertEqual(len(memberships), 1)  # identical batch contents in every order
+        self.assertEqual(len({o.batches for o in orders}), 3)  # but different batch orders
+        loader = ReplayLoader(samples, list(samples), orders[0], batch_size=8)
+        self.assertEqual([b.ids for b in loader], list(orders[0].batches))
+        loader.verify_complete()
+
+    def test_domain_blocked_batches_are_single_domain_and_contiguous(self):
+        samples, _ = _world(30)
+        dom = {k: s.domain for k, s in samples.items()}
+        orders = make_orders(list(samples), "domain_blocked_batches", [5, 6, 7], dom, batch_size=4,
+                             partition_seed=1)
+        self.assertEqual(len({frozenset(frozenset(b) for b in o.batches) for o in orders}), 1)
+        for o in orders:
+            seq = []
+            for b in o.batches:
+                ds = {dom[i] for i in b}
+                self.assertEqual(len(ds), 1)
+                seq.append(ds.pop())
+            self.assertEqual(sum(1 for a, b in zip(seq, seq[1:]) if a != b), 2)
+        with self.assertRaises(ValueError):
+            make_orders(list(samples), "batch_permutation", [1])  # partition seed / batch size required
+
     def test_repeated_ids_in_multiset_supported(self):
         samples, _ = _world(3)
         declared = ["s000", "s000", "s001", "s002"]

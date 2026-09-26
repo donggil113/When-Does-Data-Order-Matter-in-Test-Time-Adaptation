@@ -2,8 +2,8 @@
 
 import unittest
 
-from ordertta.analysis import (compare_order_families, decide, nearest_rank_quantile, order_stats,
-                               paired_bootstrap_ci)
+from ordertta.analysis import (compare_order_families, decide, decide_stage, nearest_rank_quantile, order_stats,
+                               paired_bootstrap_ci, seedwise_condition_summary)
 
 K = 12
 WIGGLE = [((i * 7) % K - (K - 1) / 2) / ((K - 1) / 2) for i in range(K)]  # deterministic zero-mean pattern in [-1, 1]
@@ -92,3 +92,61 @@ class Decision(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+ARMS = ["none", "base", "cand", "util", "small"]
+STAGE_RULE = {"candidate": "cand", "no_adapt": "none", "baseline": "base", "required_controls": ["util", "small"],
+              "drift_reference": "util", "mie": {"spread_abs": 0.005, "gain_abs": 0.01},
+              "tolerance": {"spread_abs": 0.0025, "gain_abs": 0.005}, "n_seeds": 3}
+W8 = WIGGLE[:8]
+
+
+def cond(**arms):
+    """Three seeds with the same per-order pattern (plus a per-seed offset) for every arm."""
+    return {f"r{k}": {a: [v[0] + 0.001 * k + v[1] * w for w in W8] for a, v in arms.items()} for k in range(3)}
+
+
+def summ(t):
+    return seedwise_condition_summary(t, ARMS, "cand", "none", [a for a in ARMS if a != "cand"])
+
+
+def stage(stat, drift, drift_online=None, statuses=None):
+    st = statuses or {"stat": {a: "OK" for a in ARMS}, "drift": {a: "OK" for a in ARMS}}
+    return decide_stage(summ(stat), summ(drift), st, dict(STAGE_RULE, drift_online=summ(drift_online or drift)))
+
+
+GOOD_STAT = dict(none=(0.40, 0.0), base=(0.30, 0.05), cand=(0.30, 0.004), util=(0.30, 0.03), small=(0.36, 0.004))
+GOOD_DRIFT = dict(none=(0.40, 0.0), base=(0.30, 0.02), cand=(0.31, 0.01), util=(0.31, 0.01), small=(0.35, 0.01))
+
+
+class StageDecision(unittest.TestCase):
+    def test_seedwise_summary_has_no_pooled_ci(self):
+        s = summ(cond(**GOOD_STAT))
+        self.assertEqual(s["seeds"], ["r0", "r1", "r2"])
+        self.assertEqual(len(s["paired_vs_candidate"]["util"]["per_seed"]), 3)
+        self.assertNotIn("ci_lo", str(s))
+
+    def test_candidate_flag(self):
+        d = stage(cond(**GOOD_STAT), cond(**GOOD_DRIFT))
+        self.assertEqual(d["label"], "REALDATA_PILOT_CANDIDATE", d.get("reasons"))
+
+    def test_incomplete_when_required_arm_missing(self):
+        st = {"stat": {a: "OK" for a in ARMS}, "drift": dict({a: "OK" for a in ARMS}, util="CAP_EXCEEDED")}
+        self.assertEqual(stage(cond(**GOOD_STAT), cond(**GOOD_DRIFT), statuses=st)["label"], "INCOMPLETE")
+
+    def test_same_as_utility_only_is_not_supported(self):
+        d = stage(cond(**dict(GOOD_STAT, util=(0.30, 0.004))), cond(**GOOD_DRIFT))
+        self.assertEqual(d["label"], "ORDER_PENALTY_ADDED_UTILITY_NOT_SUPPORTED")
+        self.assertIn("NOT_BETTER_THAN_util", d["reasons"])
+
+    def test_explained_by_small_lr(self):
+        d = stage(cond(**dict(GOOD_STAT, small=(0.301, 0.004))), cond(**GOOD_DRIFT))
+        self.assertIn("NOT_BETTER_THAN_small", d["reasons"])
+
+    def test_stable_but_no_gain_is_not_success(self):
+        d = stage(cond(**dict(GOOD_STAT, cand=(0.40, 0.0))), cond(**GOOD_DRIFT))
+        self.assertIn("ADAPTATION_GAIN_LOST_OR_BELOW_MIE", d["reasons"])
+
+    def test_drift_damage_blocks_flag(self):
+        d = stage(cond(**GOOD_STAT), cond(**dict(GOOD_DRIFT, cand=(0.33, 0.01))))
+        self.assertIn("DRIFT_DAMAGE_REGIME_END_ERROR", d["reasons"])

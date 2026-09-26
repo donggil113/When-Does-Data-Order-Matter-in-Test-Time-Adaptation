@@ -9,6 +9,7 @@ import tempfile
 import unittest
 
 from ordertta.runner import ConfigError, dry_run, run, validate_config
+from ordertta.stage import load_stage, run_stage
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SMOKE = os.path.join(ROOT, "configs", "cpu_smoke.json")
@@ -178,6 +179,10 @@ class Validation(unittest.TestCase):
         paths = sorted(glob.glob(os.path.join(ROOT, "configs", "*.json")))
         self.assertGreaterEqual(len(paths), 1)
         for p in paths:
+            with open(p) as f:
+                if "conditions" in json.load(f):  # stage file: validated through its condition configs
+                    load_stage(p)
+                    continue
             plan = dry_run(p)
             self.assertTrue(plan["replicates"], p)
             for rep in plan["replicates"]:
@@ -186,3 +191,78 @@ class Validation(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+STAGE = os.path.join(ROOT, "configs", "stage2_order_penalty_diagnostic.json")
+
+
+def tiny_stage(tmp, cpu_total=3600.0, reserve=0.0):
+    """The frozen stage-2 configs with a tiny world, 2 seeds and 3 orders (test only)."""
+    with open(STAGE) as f:
+        stage = json.load(f)
+    small_world = tiny_config()["world"]
+    for c in stage["conditions"]:
+        with open(os.path.join(ROOT, c["config"])) as f:
+            cfg = json.load(f)
+        cfg["world"] = small_world
+        cfg["model"]["source_epochs"] = 60
+        cfg["replicate_seeds"] = [0, 1]
+        cfg["stream"]["order_seeds"] = [1, 2, 3]
+        cfg["tuning"]["lr_grid"] = [0.1, 0.5]
+        cfg["tuning"]["order_seeds"] = [900]
+        for m in cfg["methods"]:
+            if m.get("norm_match", {}).get("mode") == "calibrated_global":
+                m["norm_match"].update({"iters": 20, "calibration_order_seeds": [301]})
+        path = os.path.join(tmp, os.path.basename(c["config"]))
+        with open(path, "w") as f:
+            json.dump(cfg, f)
+        c["config"] = path
+    stage["decision"]["n_seeds"] = 2
+    stage["budget"].update({"max_cpu_seconds_total": cpu_total, "reserve_cpu_seconds": reserve})
+    path = os.path.join(tmp, "stage.json")
+    with open(path, "w") as f:
+        json.dump(stage, f)
+    return path
+
+
+class Stage(RunnerTestCase):
+    def _stage(self, **kw):
+        out = run_stage(tiny_stage(self.tmp, **kw), os.path.join(self.tmp, "runs"), "st", set_limits=False)
+        with open(os.path.join(out, "stage_summary.json")) as f:
+            s = json.load(f)
+        with open(os.path.join(out, "stage_manifest.json")) as f:
+            m = json.load(f)
+        return out, s, m
+
+    def test_stage_end_to_end_and_audits(self):
+        out, s, m = self._stage()
+        self.assertEqual(s["software_status"], "STAGE_COMPLETED")
+        self.assertIn(s["decision"]["label"], {"ORDER_PENALTY_ADDED_UTILITY_NOT_SUPPORTED",
+                                               "REALDATA_PILOT_CANDIDATE"})
+        for name in ("stationary_fixed_batches", "drift_fixed_batches", "stationary_reshuffle"):
+            self.assertTrue(all(v == "OK" for v in s["conditions"][name]["method_status"].values()), name)
+        with open(os.path.join(out, "drift_fixed_batches", "summary.json")) as f:
+            drift = json.load(f)
+        rep = drift["replicates"][0]
+        subs = rep["subspaces"]
+        self.assertEqual(subs["utility_only"]["dim"], subs["order_aware"]["dim"])  # rank matched
+        oa_ids = {r["sample_ids_sha256"] for r in drift["cost_ledger"]["records"]
+                  if r["phase"] == "meta_training:order_aware"}
+        self.assertIn(subs["utility_only"]["provenance"]["meta_ids_sha256"], oa_ids)  # same meta data
+        for o, d in rep["diagnostics"]["tent_full"].items():
+            self.assertEqual(len(d["regime"]), 3)  # one current-regime evaluation per domain block (3 domains)
+            self.assertTrue(d["state_checks"]["frozen_params_unchanged"])
+        for o, d in rep["diagnostics"]["norm_matched_per_step_causal"].items():
+            self.assertTrue(d["reference_matches_target_trace"], o)
+            self.assertGreater(d["reference_grad_evals"], 0)
+        totals = drift["cost_ledger"]["totals"]
+        self.assertFalse(totals["calibration"]["any_labels"])
+        self.assertTrue(totals["tuning"]["any_labels"])
+        self.assertIn("regime_end_error_mean", drift["decision"]["seedwise"])
+        self.assertIn("cpu_seconds_total_incl_children", m)
+
+    def test_cpu_budget_exhaustion_is_preserved_as_incomplete(self):
+        _, s, _ = self._stage(cpu_total=0.3)
+        self.assertEqual(s["decision"]["label"], "INCOMPLETE")
+        statuses = [v for c in s["conditions"].values() for v in c.get("method_status", {}).values()]
+        self.assertIn("CAP_EXCEEDED", statuses + [c["status"] for c in s["conditions"].values()])

@@ -9,7 +9,7 @@ from __future__ import annotations
 import math
 import random
 import statistics
-from typing import Dict, Mapping, Optional, Sequence
+from typing import Dict, List, Mapping, Optional, Sequence
 
 # errors[replicate][method][order_index] -> terminal holdout error
 Errors = Mapping[str, Mapping[str, Sequence[float]]]
@@ -164,6 +164,131 @@ def compare_order_families(errors_a: Errors, errors_b: Errors, method: str, metr
     return {"point": point, "ci_lo": lo, "ci_hi": hi, "n_boot": n_boot, "alpha": alpha}
 
 
+# ------------------------------------------------------------------ seedwise (v2) summaries and stage rule
+#
+# Orders are nested in seeds (worlds); they are not independent replicates. v2 therefore reports, per seed,
+# statistics over that seed's observed orders and paired (same seed, same order) differences, and then only
+# the list of per-seed values, their mean and their sign count across seeds. No confidence interval is formed
+# by pooling seeds and orders.
+
+def _std(xs: Sequence[float]) -> float:
+    return statistics.stdev(xs) if len(xs) > 1 else 0.0
+
+
+def seedwise_condition_summary(table: Errors, arms: Sequence[str], candidate: str, no_adapt: str,
+                               controls: Sequence[str]) -> Dict[str, object]:
+    """``table[seed][arm]`` = metric per order (same order list for every arm within a seed; lower is better)."""
+    seeds = sorted(table)
+    per_arm: Dict[str, object] = {}
+    for a in arms:
+        rows = {}
+        for sd in seeds:
+            v = table[sd].get(a)
+            if not v:
+                continue
+            na = table[sd].get(no_adapt)
+            rows[sd] = {"mean": statistics.fmean(v), "std_over_orders": _std(v), "observed_max": max(v),
+                        "observed_min": min(v), "n_orders": len(v),
+                        "mean_gain_vs_no_adapt": (statistics.fmean(n - x for n, x in zip(na, v))
+                                                  if na and len(na) == len(v) else None)}
+        per_arm[a] = {"per_seed": rows, "seed_mean": {k: statistics.fmean(r[k] for r in rows.values())
+                                                      for k in ("mean", "std_over_orders", "observed_max")}
+                      if rows else None}
+    paired: Dict[str, object] = {}
+    for k in controls:
+        rows = {}
+        for sd in seeds:
+            c, o = table[sd].get(candidate), table[sd].get(k)
+            if not c or not o or len(c) != len(o):
+                continue
+            rows[sd] = {"mean_diff_c_minus_k": statistics.fmean(x - y for x, y in zip(c, o)),
+                        "std_diff_c_minus_k": _std(c) - _std(o),
+                        "max_diff_c_minus_k": max(c) - max(o)}
+        paired[k] = {"per_seed": rows, "n_seeds": len(rows),
+                     "seed_mean": ({m: statistics.fmean(r[m] for r in rows.values())
+                                    for m in ("mean_diff_c_minus_k", "std_diff_c_minus_k", "max_diff_c_minus_k")}
+                                   if rows else None)}
+    return {"seeds": seeds, "per_arm": per_arm, "paired_vs_candidate": paired,
+            "note": "no pooled CI: orders are nested in seeds; see per-seed values"}
+
+
+def _dominates(pair: dict, mie: dict, tol: dict, n_seeds: int) -> Dict[str, object]:
+    """Candidate better than control on one axis by MIE, consistently in every seed, without losing more than
+    the tolerance on the other axis (seed means; lower error / lower std is better)."""
+    rows = pair["per_seed"]
+    if pair["n_seeds"] != n_seeds or not rows:
+        return {"dominates": False, "complete": False}
+    m = pair["seed_mean"]
+    all_mean_better = all(r["mean_diff_c_minus_k"] < 0 for r in rows.values())
+    all_std_better = all(r["std_diff_c_minus_k"] < 0 for r in rows.values())
+    by_mean = -m["mean_diff_c_minus_k"] >= mie["gain_abs"] and all_mean_better and \
+        m["std_diff_c_minus_k"] <= tol["spread_abs"]
+    by_spread = -m["std_diff_c_minus_k"] >= mie["spread_abs"] and all_std_better and \
+        m["mean_diff_c_minus_k"] <= tol["gain_abs"]
+    return {"dominates": bool(by_mean or by_spread), "complete": True, "by_mean_error": by_mean,
+            "by_order_spread": by_spread, "seed_mean": m}
+
+
+def decide_stage(stationary: Optional[dict], drift: Optional[dict], statuses: Mapping[str, Mapping[str, str]],
+                 rule: dict) -> Dict[str, object]:
+    """Pre-registered v2 rule for the order-penalty question.
+
+    ``stationary`` / ``drift``: outputs of ``seedwise_condition_summary`` on the primary metric of each
+    primary condition (stationary: terminal common-holdout error; drift: regime-end current-regime holdout
+    error, with online error checked separately via ``rule['drift_online']``). ``statuses[condition][arm]``.
+    """
+    c, na, base = rule["candidate"], rule["no_adapt"], rule["baseline"]
+    controls = list(rule["required_controls"])
+    mie, tol, n_seeds = rule["mie"], rule["tolerance"], rule["n_seeds"]
+    required = [c, na, base] + controls
+    missing = {cond: sorted(a for a in required if st.get(a) != "OK") for cond, st in statuses.items()}
+    missing = {k: v for k, v in missing.items() if v}
+    if missing or stationary is None or drift is None:
+        return {"label": "INCOMPLETE", "non_ok_required_arms": missing}
+    reasons: List[str] = []
+    ev: Dict[str, object] = {}
+    cand = stationary["per_arm"][c]["per_seed"]
+    gains = [r["mean_gain_vs_no_adapt"] for r in cand.values()]
+    ev["stationary_gain_vs_no_adapt_per_seed"] = gains
+    if len(gains) != n_seeds or statistics.fmean(gains) < mie["gain_abs"] or min(gains) <= 0:
+        reasons.append("ADAPTATION_GAIN_LOST_OR_BELOW_MIE")
+    base_pair = stationary["paired_vs_candidate"].get(base)
+    if base_pair is None or base_pair["n_seeds"] != n_seeds:
+        return {"label": "INCOMPLETE", "reason": f"paired rows vs {base} missing"}
+    std_red = [-r["std_diff_c_minus_k"] for r in base_pair["per_seed"].values()]
+    ev["stationary_std_reduction_vs_baseline_per_seed"] = std_red
+    if statistics.fmean(std_red) < mie["spread_abs"] or min(std_red) <= 0:
+        reasons.append("NO_ORDER_ROBUSTNESS_GAIN_VS_BASELINE")
+    dom = {}
+    for k in controls:
+        d = _dominates(stationary["paired_vs_candidate"][k], mie, tol, n_seeds)
+        dom[k] = d
+        if not d["complete"]:
+            return {"label": "INCOMPLETE", "reason": f"paired rows vs {k} missing"}
+        if not d["dominates"]:
+            reasons.append(f"NOT_BETTER_THAN_{k}")
+    ev["stationary_domination"] = dom
+    guard = {}
+    for metric_name, summ in (("regime_end_error", drift), ("online_error", rule.get("drift_online"))):
+        if summ is None:
+            return {"label": "INCOMPLETE", "reason": f"drift {metric_name} summary missing"}
+        ref = summ["paired_vs_candidate"].get(rule["drift_reference"])
+        if ref is None or ref["n_seeds"] != n_seeds:
+            return {"label": "INCOMPLETE", "reason": f"drift {metric_name} rows vs reference missing"}
+        dmg = ref["seed_mean"]["mean_diff_c_minus_k"]
+        gain = statistics.fmean(r["mean_gain_vs_no_adapt"] for r in summ["per_arm"][c]["per_seed"].values())
+        guard[metric_name] = {"candidate_minus_reference_mean": dmg, "candidate_gain_vs_no_adapt": gain,
+                              "within_tolerance": dmg <= tol["gain_abs"] and gain >= 0}
+        if not guard[metric_name]["within_tolerance"]:
+            reasons.append(f"DRIFT_DAMAGE_{metric_name.upper()}")
+    ev["drift_guard"] = guard
+    if reasons:
+        return {"label": "ORDER_PENALTY_ADDED_UTILITY_NOT_SUPPORTED", "reasons": reasons, "evidence": ev,
+                "scope": "this toy diagnostic only; non-support is not evidence of equivalence"}
+    return {"label": "REALDATA_PILOT_CANDIDATE", "evidence": ev,
+            "scope": "toy diagnostic on 3 seeds x sampled orders; not a performance, robustness or novelty claim"}
+
+
 def summarize(errors: Errors, no_adapt: str) -> Dict[str, Dict[str, object]]:
     methods = sorted({m for per_m in errors.values() for m in per_m})
     out: Dict[str, Dict[str, object]] = {}
@@ -176,4 +301,4 @@ def summarize(errors: Errors, no_adapt: str) -> Dict[str, Dict[str, object]]:
 
 
 __all__ = ["order_stats", "spread", "pooled_metric", "paired_bootstrap_ci", "decide", "summarize",
-           "nearest_rank_quantile", "compare_order_families"]
+           "nearest_rank_quantile", "compare_order_families", "seedwise_condition_summary", "decide_stage"]

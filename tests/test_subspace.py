@@ -6,7 +6,8 @@ import unittest
 from ordertta import linalg as la
 from ordertta.quadratic import Quadratic, projected_losses, two_step_second_order_term
 from ordertta.subspace import (AdaptationSubspace, CostLedger, CostRecord, MetaBatchStats, full_space,
-                               gradient_pca_subspace, order_aware_subspace, random_subspace)
+                               gradient_pca_subspace, order_aware_subspace, random_subspace,
+                               utility_only_subspace)
 
 
 class API(unittest.TestCase):
@@ -103,6 +104,16 @@ class OrderAwareFitter(unittest.TestCase):
         self.assertEqual(sorted(s0.provenance["chosen_pool_indices"]), [0, 1])
         picked = [t for t in s0.provenance["greedy_trace"] if "picked" in t]
         self.assertAlmostEqual(picked[-1]["score"], 1.0, places=12)
+
+    def test_utility_only_is_rank_matched_and_penalty_free(self):
+        cand = order_aware_subspace(self.pool, self.stats, self.jvp, k=2, lr=0.5, lam=50.0, normalized=True)
+        util = utility_only_subspace(self.pool, self.stats, self.jvp, cand.dim)
+        self.assertEqual(util.dim, cand.dim)
+        self.assertEqual(util.provenance["lam"], 0.0)
+        self.assertEqual(util.provenance["pool_gain"], cand.provenance["pool_gain"])  # same statistics
+        self.assertEqual(util.provenance["chosen_pool_indices"], [0])  # highest-gain axis, penalty ignored
+        # forced rank: even a non-improving direction is added to match the requested rank
+        self.assertEqual(utility_only_subspace(self.pool, self.stats, self.jvp, 3).dim, 3)
 
     def test_needs_two_batches(self):
         with self.assertRaises(ValueError):
