@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
+paper/build/*
+!paper/build/main.log
+!paper/build/missfont_from_failed_build.log

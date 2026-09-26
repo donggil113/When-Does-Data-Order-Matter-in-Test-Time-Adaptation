@@ -1,13 +1,13 @@
 \section{Problem and Experimental Setting}
 \label{sec:setting}
 
-\paragraph{Synthetic worlds.} Each world seed generates $\res{ncls}$ Gaussian classes in $\mathbb{R}^{\res{dim}}$
+\paragraph{Synthetic worlds.} Each world seed generates \res{ncls} Gaussian classes in $\mathbb{R}^{\res{dim}}$
 and several shifted domains, each an independent per-feature affine map of the source distribution plus small
 noise. Disjoint splits are drawn from the same seed: labelled source data (to train the classifier), meta
 data under $4$ simulated shifts (used only to fit subspaces), development and calibration streams with a
 development holdout under $2$ validation shifts, and a test stream and test holdout under
-$\res{ntestdom}$ test shifts. The test stream has $\res{nstream}$ samples and the test holdout
-$\res{nhold}$. No test label is visible to any adaptation arm (Appendix~\ref{app:access}).
+\res{ntestdom} test shifts. The test stream has \res{nstream} samples and the test holdout
+\res{nhold}. No test label is visible to any adaptation arm (Appendix~\ref{app:access}).
 
 \paragraph{Model and entropy-minimization toy baseline.} A linear softmax classifier $f(x)=W z+b$ is trained
 on source data and frozen. Test-time adaptation updates $\theta=(\gamma,\beta)\in\mathbb{R}^{2\times\res{dim}}$
@@ -17,15 +17,15 @@ $\eta$, on the mean prediction entropy of the current batch. We call this the \e
 baseline} (EM-toy). It shares Tent's objective but differs from the published Tent configuration, which
 adapts normalization affine parameters of a deep network and re-estimates normalization statistics on each
 test batch~\citep{wang2021tent}. Run identifiers keep the historical arm id \texttt{tent\_full}; the
-mapping to display names is in \texttt{paper/tables/display\_names.tsv}.
+mapping to display names is in \path{paper/tables/display_names.tsv}.
 
-\paragraph{Orders and conditions.} One multiset of test sample IDs is replayed in $\res{norders}$ fixed orders
+\paragraph{Orders and conditions.} One multiset of test sample IDs is replayed in \res{norders} fixed orders
 per world seed, and every arm sees the same orders. In the \emph{primary stationary} condition the stream is
-partitioned once into batches of $\res{batch}$ and orders permute only the batches ($\res{stepsstat}$ steps),
+partitioned once into batches of \res{batch} and orders permute only the batches (\res{stepsstat} steps),
 so batch composition is identical across orders. The \emph{secondary} condition reshuffles samples and
 re-forms batches for every order; it is reported separately and not used for the decision. In the
 \emph{drift} condition each test domain is partitioned once into single-domain batches and orders permute the
-sequence of domain blocks and the batches within each block ($\res{stepsdrift}$ steps). Before every run the
+sequence of domain blocks and the batches within each block (\res{stepsdrift} steps). Before every run the
 harness checks that the adapter starts from the source parameters and $\theta_0=(\mathbf{1},\mathbf{0})$,
 that frozen parameters are unchanged afterwards, and that the global random state was not consumed.
 
@@ -36,7 +36,7 @@ block and average over blocks, and we report predict-then-update online error se
 and arm we report the mean over the observed orders, the standard deviation (SD) across them, the worst
 observed order and the gain over no adaptation. Orders are nested in world seeds. We therefore report
 per-seed values and paired per-seed differences (candidate minus control over the same orders), and we form
-no confidence interval that pools seeds and orders. With $\res{nseeds}$ seeds, the independent units are the
+no confidence interval that pools seeds and orders. With \res{nseeds} seeds, the independent units are the
 seeds.
 
 \paragraph{Arms and information access.} All adapting arms use the same loss, the same number of steps and no
@@ -54,13 +54,13 @@ $t$ of a lockstep replica of the candidate, so no future step is readable.
 \item \emph{Global norm-matched}: a full-space $\eta$ bisected on the calibration stream so that the mean
 terminal displacement matches the candidate's; this reads no labels.
 \end{itemize}
-The EM-toy, candidate and utility-only arms select $\eta$ from the same grid $\res{lrgrid}$ on development
+The EM-toy, candidate and utility-only arms select $\eta$ from the same grid \res{lrgrid} on development
 streams, by development holdout error (mean current-regime error for drift). Ties go to the smaller value.
 The grid was not widened for this study.
 
 \paragraph{Pre-registered decision rule.} The rule, the seeds (the first three of five pre-registered world
 seeds and the first eight of sixteen orders) and the minimum effects of interest (MIE; gain
-$\res{mieg}$\,pp, SD $\res{mies}$\,pp, tolerance $\res{tolg}$\,pp) were committed before the run (commit
+\res{mieg}\,pp, SD \res{mies}\,pp, tolerance \res{tolg}\,pp) were committed before the run (commit
 \texttt{\res{commit}}). The candidate is flagged for a later real-data pilot only if all of the following
 hold:
 \begin{enumerate}

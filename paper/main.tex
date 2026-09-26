@@ -8,16 +8,22 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{amsmath,amssymb}
 
 % Every reported number comes from paper/generated/numbers.tex, which is produced from the raw run files by
 % paper/scripts/export_results.py. \res{key} stops the build if a key is missing.
 \input{generated/numbers.tex}
+\input{generated/formula_numbers.tex}
 \newcommand{\res}[1]{\ifcsname res@#1\endcsname\csname res@#1\endcsname\else
   \errmessage{Undefined result key: #1}\fi}
 \newcommand{\draftnote}[1]{\textbf{[#1]}}
 
-\title{Order Sensitivity and Adaptation Utility\\in a Controlled Test-Time Adaptation Model}
+\hyphenation{SGD TTA}
+
+\title{Order Sensitivity and Adaptation Utility\\in a Controlled Test-Time Adaptation Model%
+\thanks{Internal working draft v0. Not submitted to, and not under review at, any venue. The ``Paper under
+double-blind review'' line is printed by the official anonymous template and does not describe this draft.}}
 
 % Anonymous: the official style prints "Anonymous authors" while \iclrfinalcopy is not set.
 \author{Anonymous authors}

@@ -727,17 +727,17 @@
   },
   "drift.on.cand.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_orderaware.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.69",
+   "tex": "\\ensuremath{-}1.69",
    "value": -0.016927083333333346
   },
   "drift.on.cand.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_orderaware.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$0.86",
+   "tex": "\\ensuremath{-}0.86",
    "value": -0.008593749999999987
   },
   "drift.on.cand.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_orderaware.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$8.23",
+   "tex": "\\ensuremath{-}8.23",
    "value": -0.08229166666666665
   },
   "drift.on.cand.max.r0": {
@@ -787,7 +787,7 @@
   },
   "drift.on.full.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_full.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.28",
+   "tex": "\\ensuremath{-}1.28",
    "value": -0.012760416666666677
   },
   "drift.on.full.gain.r1": {
@@ -797,7 +797,7 @@
   },
   "drift.on.full.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_full.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$1.85",
+   "tex": "\\ensuremath{-}1.85",
    "value": -0.018489583333333323
   },
   "drift.on.full.max.r0": {
@@ -847,7 +847,7 @@
   },
   "drift.on.lrA.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_full_lr_x0.3.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.29",
+   "tex": "\\ensuremath{-}0.29",
    "value": -0.0028645833333333474
   },
   "drift.on.lrA.gain.r1": {
@@ -857,7 +857,7 @@
   },
   "drift.on.lrA.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_full_lr_x0.3.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.55",
+   "tex": "\\ensuremath{-}0.55",
    "value": -0.0054687499999999944
   },
   "drift.on.lrA.max.r0": {
@@ -967,17 +967,17 @@
   },
   "drift.on.nglob.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.norm_matched_global.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.29",
+   "tex": "\\ensuremath{-}0.29",
    "value": -0.002864583333333344
   },
   "drift.on.nglob.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.norm_matched_global.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$5.57",
+   "tex": "\\ensuremath{-}5.57",
    "value": -0.055729166666666656
   },
   "drift.on.nglob.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.norm_matched_global.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.73",
+   "tex": "\\ensuremath{-}0.73",
    "value": -0.007291666666666662
   },
   "drift.on.nglob.max.r0": {
@@ -1087,7 +1087,7 @@
   },
   "drift.on.nstep.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.norm_matched_per_step_causal.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$2.06",
+   "tex": "\\ensuremath{-}2.06",
    "value": -0.020572916666666677
   },
   "drift.on.nstep.gain.r1": {
@@ -1097,7 +1097,7 @@
   },
   "drift.on.nstep.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.norm_matched_per_step_causal.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$6.04",
+   "tex": "\\ensuremath{-}6.04",
    "value": -0.06041666666666667
   },
   "drift.on.nstep.max.r0": {
@@ -1177,12 +1177,12 @@
   },
   "drift.on.pair.full.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.tent_full.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.09",
+   "tex": "\\ensuremath{-}0.09",
    "value": -0.0009072813286395108
   },
   "drift.on.pair.full.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.tent_full.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.88",
+   "tex": "\\ensuremath{-}0.88",
    "value": -0.008790463680895765
   },
   "drift.on.pair.full.dstd.r2": {
@@ -1227,7 +1227,7 @@
   },
   "drift.on.pair.lrA.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.00",
+   "tex": "\\ensuremath{-}0.00",
    "value": -3.6340669954037716e-05
   },
   "drift.on.pair.lrA.dstd.r2": {
@@ -1287,7 +1287,7 @@
   },
   "drift.on.pair.nglob.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.norm_matched_global.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$21.67",
+   "tex": "\\ensuremath{-}21.67",
    "value": -0.2166666666666667
   },
   "drift.on.pair.nglob.dmax.r2": {
@@ -1302,7 +1302,7 @@
   },
   "drift.on.pair.nglob.dmean.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.norm_matched_global.per_seed.r1.mean_diff_c_minus_k",
-   "tex": "$-$4.71",
+   "tex": "\\ensuremath{-}4.71",
    "value": -0.047135416666666666
   },
   "drift.on.pair.nglob.dmean.r2": {
@@ -1317,7 +1317,7 @@
   },
   "drift.on.pair.nglob.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.norm_matched_global.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$9.27",
+   "tex": "\\ensuremath{-}9.27",
    "value": -0.09268756016532072
   },
   "drift.on.pair.nglob.dstd.r2": {
@@ -1372,12 +1372,12 @@
   },
   "drift.on.pair.nstep.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$0.83",
+   "tex": "\\ensuremath{-}0.83",
    "value": -0.008333333333333331
   },
   "drift.on.pair.nstep.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$16.04",
+   "tex": "\\ensuremath{-}16.04",
    "value": -0.16041666666666668
   },
   "drift.on.pair.nstep.dmax.r2": {
@@ -1387,7 +1387,7 @@
   },
   "drift.on.pair.nstep.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.36",
+   "tex": "\\ensuremath{-}0.36",
    "value": -0.003645833333333331
   },
   "drift.on.pair.nstep.dmean.r1": {
@@ -1407,7 +1407,7 @@
   },
   "drift.on.pair.nstep.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$6.97",
+   "tex": "\\ensuremath{-}6.97",
    "value": -0.06968462386451325
   },
   "drift.on.pair.nstep.dstd.r2": {
@@ -1462,7 +1462,7 @@
   },
   "drift.on.util.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_utility_only.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.69",
+   "tex": "\\ensuremath{-}1.69",
    "value": -0.016927083333333346
   },
   "drift.on.util.gain.r1": {
@@ -1472,7 +1472,7 @@
   },
   "drift.on.util.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.online_error.per_arm.tent_utility_only.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$8.23",
+   "tex": "\\ensuremath{-}8.23",
    "value": -0.08229166666666665
   },
   "drift.on.util.max.r0": {
@@ -1537,17 +1537,17 @@
   },
   "drift.re.cand.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_orderaware.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.96",
+   "tex": "\\ensuremath{-}0.96",
    "value": -0.00958333333333334
   },
   "drift.re.cand.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_orderaware.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$1.02",
+   "tex": "\\ensuremath{-}1.02",
    "value": -0.010208333333333323
   },
   "drift.re.cand.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_orderaware.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$8.06",
+   "tex": "\\ensuremath{-}8.06",
    "value": -0.080625
   },
   "drift.re.cand.max.r0": {
@@ -1597,17 +1597,17 @@
   },
   "drift.re.full.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_full.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.42",
+   "tex": "\\ensuremath{-}0.42",
    "value": -0.004166666666666673
   },
   "drift.re.full.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_full.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$0.33",
+   "tex": "\\ensuremath{-}0.33",
    "value": -0.0033333333333333236
   },
   "drift.re.full.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_full.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.40",
+   "tex": "\\ensuremath{-}0.40",
    "value": -0.003958333333333328
   },
   "drift.re.full.max.r0": {
@@ -1657,7 +1657,7 @@
   },
   "drift.re.lrA.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_full_lr_x0.3.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.83",
+   "tex": "\\ensuremath{-}0.83",
    "value": -0.008333333333333349
   },
   "drift.re.lrA.gain.r1": {
@@ -1667,7 +1667,7 @@
   },
   "drift.re.lrA.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_full_lr_x0.3.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.04",
+   "tex": "\\ensuremath{-}0.04",
    "value": -0.00041666666666665547
   },
   "drift.re.lrA.max.r0": {
@@ -1717,12 +1717,12 @@
   },
   "drift.re.lrB.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_full_lr_x0.1.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.69",
+   "tex": "\\ensuremath{-}0.69",
    "value": -0.0068750000000000165
   },
   "drift.re.lrB.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_full_lr_x0.1.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$0.42",
+   "tex": "\\ensuremath{-}0.42",
    "value": -0.004166666666666655
   },
   "drift.re.lrB.gain.r2": {
@@ -1782,12 +1782,12 @@
   },
   "drift.re.nglob.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.norm_matched_global.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$6.21",
+   "tex": "\\ensuremath{-}6.21",
    "value": -0.062083333333333324
   },
   "drift.re.nglob.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.norm_matched_global.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.19",
+   "tex": "\\ensuremath{-}0.19",
    "value": -0.0018750000000000017
   },
   "drift.re.nglob.max.r0": {
@@ -1897,7 +1897,7 @@
   },
   "drift.re.nstep.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.norm_matched_per_step_causal.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.27",
+   "tex": "\\ensuremath{-}1.27",
    "value": -0.012708333333333346
   },
   "drift.re.nstep.gain.r1": {
@@ -1907,7 +1907,7 @@
   },
   "drift.re.nstep.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.norm_matched_per_step_causal.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$3.21",
+   "tex": "\\ensuremath{-}3.21",
    "value": -0.03208333333333333
   },
   "drift.re.nstep.max.r0": {
@@ -1962,7 +1962,7 @@
   },
   "drift.re.pair.full.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.tent_full.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$1.00",
+   "tex": "\\ensuremath{-}1.00",
    "value": -0.009999999999999981
   },
   "drift.re.pair.full.dmax.r2": {
@@ -1992,7 +1992,7 @@
   },
   "drift.re.pair.full.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.tent_full.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.88",
+   "tex": "\\ensuremath{-}0.88",
    "value": -0.00882843507257364
   },
   "drift.re.pair.full.dstd.r2": {
@@ -2037,7 +2037,7 @@
   },
   "drift.re.pair.lrA.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.03",
+   "tex": "\\ensuremath{-}0.03",
    "value": -0.0003430012354453775
   },
   "drift.re.pair.lrA.dstd.r2": {
@@ -2097,7 +2097,7 @@
   },
   "drift.re.pair.nglob.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.norm_matched_global.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$22.50",
+   "tex": "\\ensuremath{-}22.50",
    "value": -0.225
   },
   "drift.re.pair.nglob.dmax.r2": {
@@ -2112,7 +2112,7 @@
   },
   "drift.re.pair.nglob.dmean.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.norm_matched_global.per_seed.r1.mean_diff_c_minus_k",
-   "tex": "$-$5.19",
+   "tex": "\\ensuremath{-}5.19",
    "value": -0.051875000000000004
   },
   "drift.re.pair.nglob.dmean.r2": {
@@ -2127,7 +2127,7 @@
   },
   "drift.re.pair.nglob.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.norm_matched_global.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$9.61",
+   "tex": "\\ensuremath{-}9.61",
    "value": -0.09611555617653592
   },
   "drift.re.pair.nglob.dstd.r2": {
@@ -2182,12 +2182,12 @@
   },
   "drift.re.pair.nstep.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$1.17",
+   "tex": "\\ensuremath{-}1.17",
    "value": -0.011666666666666659
   },
   "drift.re.pair.nstep.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$18.50",
+   "tex": "\\ensuremath{-}18.50",
    "value": -0.18499999999999997
   },
   "drift.re.pair.nstep.dmax.r2": {
@@ -2197,7 +2197,7 @@
   },
   "drift.re.pair.nstep.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.31",
+   "tex": "\\ensuremath{-}0.31",
    "value": -0.0031250000000000062
   },
   "drift.re.pair.nstep.dmean.r1": {
@@ -2217,7 +2217,7 @@
   },
   "drift.re.pair.nstep.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$8.25",
+   "tex": "\\ensuremath{-}8.25",
    "value": -0.08247257193044873
   },
   "drift.re.pair.nstep.dstd.r2": {
@@ -2262,7 +2262,7 @@
   },
   "drift.re.pair.util.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.paired_vs_candidate.tent_utility_only.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.06",
+   "tex": "\\ensuremath{-}0.06",
    "value": -0.0006043591090051908
   },
   "drift.re.pair.util.dstd.r2": {
@@ -2272,7 +2272,7 @@
   },
   "drift.re.util.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_utility_only.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.96",
+   "tex": "\\ensuremath{-}0.96",
    "value": -0.00958333333333334
   },
   "drift.re.util.gain.r1": {
@@ -2282,7 +2282,7 @@
   },
   "drift.re.util.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.regime_end_error_mean.per_arm.tent_utility_only.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$8.06",
+   "tex": "\\ensuremath{-}8.06",
    "value": -0.080625
   },
   "drift.re.util.max.r0": {
@@ -2332,17 +2332,17 @@
   },
   "drift.te.cand.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_orderaware.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$3.27",
+   "tex": "\\ensuremath{-}3.27",
    "value": -0.032708333333333325
   },
   "drift.te.cand.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_orderaware.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$3.02",
+   "tex": "\\ensuremath{-}3.02",
    "value": -0.030208333333333334
   },
   "drift.te.cand.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_orderaware.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$12.48",
+   "tex": "\\ensuremath{-}12.48",
    "value": -0.12479166666666663
   },
   "drift.te.cand.max.r0": {
@@ -2392,17 +2392,17 @@
   },
   "drift.te.full.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.27",
+   "tex": "\\ensuremath{-}1.27",
    "value": -0.012708333333333328
   },
   "drift.te.full.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$0.73",
+   "tex": "\\ensuremath{-}0.73",
    "value": -0.007291666666666662
   },
   "drift.te.full.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.33",
+   "tex": "\\ensuremath{-}0.33",
    "value": -0.00333333333333332
   },
   "drift.te.full.max.r0": {
@@ -2452,7 +2452,7 @@
   },
   "drift.te.lrA.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full_lr_x0.3.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.29",
+   "tex": "\\ensuremath{-}1.29",
    "value": -0.012916666666666653
   },
   "drift.te.lrA.gain.r1": {
@@ -2512,7 +2512,7 @@
   },
   "drift.te.lrB.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full_lr_x0.1.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.94",
+   "tex": "\\ensuremath{-}0.94",
    "value": -0.009374999999999984
   },
   "drift.te.lrB.gain.r1": {
@@ -2572,12 +2572,12 @@
   },
   "drift.te.nglob.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_global.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.37",
+   "tex": "\\ensuremath{-}0.37",
    "value": -0.0037499999999999895
   },
   "drift.te.nglob.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_global.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$8.94",
+   "tex": "\\ensuremath{-}8.94",
    "value": -0.089375
   },
   "drift.te.nglob.gain.r2": {
@@ -2692,17 +2692,17 @@
   },
   "drift.te.nstep.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_per_step_causal.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$2.69",
+   "tex": "\\ensuremath{-}2.69",
    "value": -0.026874999999999993
   },
   "drift.te.nstep.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_per_step_causal.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$0.85",
+   "tex": "\\ensuremath{-}0.85",
    "value": -0.008541666666666666
   },
   "drift.te.nstep.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_per_step_causal.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$3.60",
+   "tex": "\\ensuremath{-}3.60",
    "value": -0.036041666666666666
   },
   "drift.te.nstep.max.r0": {
@@ -2787,7 +2787,7 @@
   },
   "drift.te.pair.full.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.59",
+   "tex": "\\ensuremath{-}0.59",
    "value": -0.005897818267896149
   },
   "drift.te.pair.full.dstd.r2": {
@@ -2832,7 +2832,7 @@
   },
   "drift.te.pair.lrA.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.09",
+   "tex": "\\ensuremath{-}0.09",
    "value": -0.0008694662024404175
   },
   "drift.te.pair.lrA.dstd.r2": {
@@ -2892,7 +2892,7 @@
   },
   "drift.te.pair.nglob.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$21.83",
+   "tex": "\\ensuremath{-}21.83",
    "value": -0.2183333333333333
   },
   "drift.te.pair.nglob.dmax.r2": {
@@ -2907,7 +2907,7 @@
   },
   "drift.te.pair.nglob.dmean.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r1.mean_diff_c_minus_k",
-   "tex": "$-$5.92",
+   "tex": "\\ensuremath{-}5.92",
    "value": -0.05916666666666666
   },
   "drift.te.pair.nglob.dmean.r2": {
@@ -2922,7 +2922,7 @@
   },
   "drift.te.pair.nglob.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$10.69",
+   "tex": "\\ensuremath{-}10.69",
    "value": -0.10685978366331177
   },
   "drift.te.pair.nglob.dstd.r2": {
@@ -2977,12 +2977,12 @@
   },
   "drift.te.pair.nstep.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$1.17",
+   "tex": "\\ensuremath{-}1.17",
    "value": -0.011666666666666659
   },
   "drift.te.pair.nstep.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$21.50",
+   "tex": "\\ensuremath{-}21.50",
    "value": -0.215
   },
   "drift.te.pair.nstep.dmax.r2": {
@@ -3007,12 +3007,12 @@
   },
   "drift.te.pair.nstep.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.44",
+   "tex": "\\ensuremath{-}0.44",
    "value": -0.004375792210747322
   },
   "drift.te.pair.nstep.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$9.66",
+   "tex": "\\ensuremath{-}9.66",
    "value": -0.09657428863014617
   },
   "drift.te.pair.nstep.dstd.r2": {
@@ -3057,7 +3057,7 @@
   },
   "drift.te.pair.util.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_utility_only.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.06",
+   "tex": "\\ensuremath{-}0.06",
    "value": -0.0005507363077085839
   },
   "drift.te.pair.util.dstd.r2": {
@@ -3067,7 +3067,7 @@
   },
   "drift.te.util.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_utility_only.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$3.27",
+   "tex": "\\ensuremath{-}3.27",
    "value": -0.032708333333333325
   },
   "drift.te.util.gain.r1": {
@@ -3077,7 +3077,7 @@
   },
   "drift.te.util.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/drift_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_utility_only.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$12.48",
+   "tex": "\\ensuremath{-}12.48",
    "value": -0.12479166666666663
   },
   "drift.te.util.max.r0": {
@@ -3127,7 +3127,7 @@
   },
   "ev.drift.on.gain": {
    "source": "runs/stage2_order_penalty_0119a34/stage_summary.json:decision.evidence.drift_guard.online_error.candidate_gain_vs_no_adapt",
-   "tex": "$-$3.59",
+   "tex": "\\ensuremath{-}3.59",
    "value": -0.03593749999999999
   },
   "ev.drift.on.vsutil": {
@@ -3137,7 +3137,7 @@
   },
   "ev.drift.re.gain": {
    "source": "runs/stage2_order_penalty_0119a34/stage_summary.json:decision.evidence.drift_guard.regime_end_error.candidate_gain_vs_no_adapt",
-   "tex": "$-$3.35",
+   "tex": "\\ensuremath{-}3.35",
    "value": -0.03347222222222222
   },
   "ev.drift.re.vsutil": {
@@ -3152,12 +3152,12 @@
   },
   "ev.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stage_summary.json:decision.evidence.stationary_gain_vs_no_adapt_per_seed[1]",
-   "tex": "$-$3.10",
+   "tex": "\\ensuremath{-}3.10",
    "value": -0.031041666666666665
   },
   "ev.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stage_summary.json:decision.evidence.stationary_gain_vs_no_adapt_per_seed[2]",
-   "tex": "$-$7.42",
+   "tex": "\\ensuremath{-}7.42",
    "value": -0.07416666666666664
   },
   "ev.stdred.r0": {
@@ -3172,7 +3172,7 @@
   },
   "ev.stdred.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stage_summary.json:decision.evidence.stationary_std_reduction_vs_baseline_per_seed[2]",
-   "tex": "$-$1.10",
+   "tex": "\\ensuremath{-}1.10",
    "value": -0.01104903642589675
   },
   "lrgrid": {
@@ -3591,12 +3591,12 @@
   },
   "reshuf.te.cand.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_orderaware.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$3.12",
+   "tex": "\\ensuremath{-}3.12",
    "value": -0.031249999999999997
   },
   "reshuf.te.cand.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_orderaware.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$7.65",
+   "tex": "\\ensuremath{-}7.65",
    "value": -0.07645833333333332
   },
   "reshuf.te.cand.max.r0": {
@@ -3646,17 +3646,17 @@
   },
   "reshuf.te.full.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$2.29",
+   "tex": "\\ensuremath{-}2.29",
    "value": -0.022916666666666658
   },
   "reshuf.te.full.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$0.29",
+   "tex": "\\ensuremath{-}0.29",
    "value": -0.0029166666666666577
   },
   "reshuf.te.full.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.15",
+   "tex": "\\ensuremath{-}0.15",
    "value": -0.0014583333333333184
   },
   "reshuf.te.full.max.r0": {
@@ -3706,12 +3706,12 @@
   },
   "reshuf.te.lrA.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_full_lr_x0.3.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.79",
+   "tex": "\\ensuremath{-}1.79",
    "value": -0.017916666666666654
   },
   "reshuf.te.lrA.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_full_lr_x0.3.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$0.17",
+   "tex": "\\ensuremath{-}0.17",
    "value": -0.0016666666666666496
   },
   "reshuf.te.lrA.gain.r2": {
@@ -3766,7 +3766,7 @@
   },
   "reshuf.te.lrB.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_full_lr_x0.1.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.12",
+   "tex": "\\ensuremath{-}1.12",
    "value": -0.01124999999999999
   },
   "reshuf.te.lrB.gain.r1": {
@@ -3826,12 +3826,12 @@
   },
   "reshuf.te.nglob.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_global.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.04",
+   "tex": "\\ensuremath{-}0.04",
    "value": -0.0004166666666666624
   },
   "reshuf.te.nglob.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_global.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$1.10",
+   "tex": "\\ensuremath{-}1.10",
    "value": -0.011041666666666661
   },
   "reshuf.te.nglob.gain.r2": {
@@ -3946,7 +3946,7 @@
   },
   "reshuf.te.nstep.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_per_step_causal.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.19",
+   "tex": "\\ensuremath{-}0.19",
    "value": -0.0018749999999999913
   },
   "reshuf.te.nstep.gain.r1": {
@@ -3956,7 +3956,7 @@
   },
   "reshuf.te.nstep.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_per_step_causal.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$1.71",
+   "tex": "\\ensuremath{-}1.71",
    "value": -0.01708333333333332
   },
   "reshuf.te.nstep.max.r0": {
@@ -4006,7 +4006,7 @@
   },
   "reshuf.te.pair.full.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$4.17",
+   "tex": "\\ensuremath{-}4.17",
    "value": -0.041666666666666685
   },
   "reshuf.te.pair.full.dmax.r1": {
@@ -4021,7 +4021,7 @@
   },
   "reshuf.te.pair.full.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$2.63",
+   "tex": "\\ensuremath{-}2.63",
    "value": -0.026250000000000013
   },
   "reshuf.te.pair.full.dmean.r1": {
@@ -4036,7 +4036,7 @@
   },
   "reshuf.te.pair.full.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$1.35",
+   "tex": "\\ensuremath{-}1.35",
    "value": -0.01350337994138023
   },
   "reshuf.te.pair.full.dstd.r1": {
@@ -4051,7 +4051,7 @@
   },
   "reshuf.te.pair.lrA.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$2.50",
+   "tex": "\\ensuremath{-}2.50",
    "value": -0.025000000000000022
   },
   "reshuf.te.pair.lrA.dmax.r1": {
@@ -4066,7 +4066,7 @@
   },
   "reshuf.te.pair.lrA.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$2.13",
+   "tex": "\\ensuremath{-}2.13",
    "value": -0.02125000000000001
   },
   "reshuf.te.pair.lrA.dmean.r1": {
@@ -4081,7 +4081,7 @@
   },
   "reshuf.te.pair.lrA.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.29",
+   "tex": "\\ensuremath{-}0.29",
    "value": -0.0029209152729488806
   },
   "reshuf.te.pair.lrA.dstd.r1": {
@@ -4096,7 +4096,7 @@
   },
   "reshuf.te.pair.lrB.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.1.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$1.67",
+   "tex": "\\ensuremath{-}1.67",
    "value": -0.01666666666666669
   },
   "reshuf.te.pair.lrB.dmax.r1": {
@@ -4111,7 +4111,7 @@
   },
   "reshuf.te.pair.lrB.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.1.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$1.46",
+   "tex": "\\ensuremath{-}1.46",
    "value": -0.014583333333333344
   },
   "reshuf.te.pair.lrB.dmean.r1": {
@@ -4126,7 +4126,7 @@
   },
   "reshuf.te.pair.lrB.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.1.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.15",
+   "tex": "\\ensuremath{-}0.15",
    "value": -0.0014773421007132066
   },
   "reshuf.te.pair.lrB.dstd.r1": {
@@ -4141,7 +4141,7 @@
   },
   "reshuf.te.pair.nglob.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$0.50",
+   "tex": "\\ensuremath{-}0.50",
    "value": -0.0050000000000000044
   },
   "reshuf.te.pair.nglob.dmax.r1": {
@@ -4156,7 +4156,7 @@
   },
   "reshuf.te.pair.nglob.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.38",
+   "tex": "\\ensuremath{-}0.38",
    "value": -0.003750000000000017
   },
   "reshuf.te.pair.nglob.dmean.r1": {
@@ -4171,12 +4171,12 @@
   },
   "reshuf.te.pair.nglob.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.08",
+   "tex": "\\ensuremath{-}0.08",
    "value": -0.0007715167498104517
   },
   "reshuf.te.pair.nglob.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$0.86",
+   "tex": "\\ensuremath{-}0.86",
    "value": -0.008625895484105688
   },
   "reshuf.te.pair.nglob.dstd.r2": {
@@ -4186,7 +4186,7 @@
   },
   "reshuf.te.pair.noad.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.no_adapt.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$0.33",
+   "tex": "\\ensuremath{-}0.33",
    "value": -0.003333333333333355
   },
   "reshuf.te.pair.noad.dmax.r1": {
@@ -4201,7 +4201,7 @@
   },
   "reshuf.te.pair.noad.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.no_adapt.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.33",
+   "tex": "\\ensuremath{-}0.33",
    "value": -0.003333333333333355
   },
   "reshuf.te.pair.noad.dmean.r1": {
@@ -4231,7 +4231,7 @@
   },
   "reshuf.te.pair.nstep.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$1.00",
+   "tex": "\\ensuremath{-}1.00",
    "value": -0.010000000000000009
   },
   "reshuf.te.pair.nstep.dmax.r1": {
@@ -4246,7 +4246,7 @@
   },
   "reshuf.te.pair.nstep.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.52",
+   "tex": "\\ensuremath{-}0.52",
    "value": -0.005208333333333346
   },
   "reshuf.te.pair.nstep.dmean.r1": {
@@ -4261,12 +4261,12 @@
   },
   "reshuf.te.pair.nstep.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.27",
+   "tex": "\\ensuremath{-}0.27",
    "value": -0.0027368009363268214
   },
   "reshuf.te.pair.nstep.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$1.09",
+   "tex": "\\ensuremath{-}1.09",
    "value": -0.010863690538994174
   },
   "reshuf.te.pair.nstep.dstd.r2": {
@@ -4331,7 +4331,7 @@
   },
   "reshuf.te.util.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_reshuffle/summary.json:decision.seedwise.terminal_error.per_arm.tent_utility_only.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$7.65",
+   "tex": "\\ensuremath{-}7.65",
    "value": -0.07645833333333332
   },
   "reshuf.te.util.max.r0": {
@@ -4706,12 +4706,12 @@
   },
   "stat.te.cand.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_orderaware.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$3.10",
+   "tex": "\\ensuremath{-}3.10",
    "value": -0.031041666666666665
   },
   "stat.te.cand.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_orderaware.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$7.42",
+   "tex": "\\ensuremath{-}7.42",
    "value": -0.07416666666666664
   },
   "stat.te.cand.max.r0": {
@@ -4761,17 +4761,17 @@
   },
   "stat.te.full.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$2.42",
+   "tex": "\\ensuremath{-}2.42",
    "value": -0.024166666666666656
   },
   "stat.te.full.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$1.48",
+   "tex": "\\ensuremath{-}1.48",
    "value": -0.014791666666666665
   },
   "stat.te.full.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$0.15",
+   "tex": "\\ensuremath{-}0.15",
    "value": -0.0014583333333333184
   },
   "stat.te.full.max.r0": {
@@ -4821,7 +4821,7 @@
   },
   "stat.te.lrA.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full_lr_x0.3.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.96",
+   "tex": "\\ensuremath{-}1.96",
    "value": -0.019583333333333328
   },
   "stat.te.lrA.gain.r1": {
@@ -4881,7 +4881,7 @@
   },
   "stat.te.lrB.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_full_lr_x0.1.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$1.17",
+   "tex": "\\ensuremath{-}1.17",
    "value": -0.011666666666666659
   },
   "stat.te.lrB.gain.r1": {
@@ -4941,12 +4941,12 @@
   },
   "stat.te.nglob.gain.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_global.per_seed.r0.mean_gain_vs_no_adapt",
-   "tex": "$-$0.04",
+   "tex": "\\ensuremath{-}0.04",
    "value": -0.0004166666666666624
   },
   "stat.te.nglob.gain.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_global.per_seed.r1.mean_gain_vs_no_adapt",
-   "tex": "$-$1.92",
+   "tex": "\\ensuremath{-}1.92",
    "value": -0.019166666666666672
   },
   "stat.te.nglob.gain.r2": {
@@ -5071,7 +5071,7 @@
   },
   "stat.te.nstep.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.norm_matched_per_step_causal.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$2.19",
+   "tex": "\\ensuremath{-}2.19",
    "value": -0.02187499999999999
   },
   "stat.te.nstep.max.r0": {
@@ -5121,12 +5121,12 @@
   },
   "stat.te.pair.full.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$3.33",
+   "tex": "\\ensuremath{-}3.33",
    "value": -0.033333333333333326
   },
   "stat.te.pair.full.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$3.67",
+   "tex": "\\ensuremath{-}3.67",
    "value": -0.03666666666666668
   },
   "stat.te.pair.full.dmax.r2": {
@@ -5136,7 +5136,7 @@
   },
   "stat.te.pair.full.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$2.71",
+   "tex": "\\ensuremath{-}2.71",
    "value": -0.02708333333333334
   },
   "stat.te.pair.full.dmean.r1": {
@@ -5151,12 +5151,12 @@
   },
   "stat.te.pair.full.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.76",
+   "tex": "\\ensuremath{-}0.76",
    "value": -0.007585592190562982
   },
   "stat.te.pair.full.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$1.84",
+   "tex": "\\ensuremath{-}1.84",
    "value": -0.018435640372840394
   },
   "stat.te.pair.full.dstd.r2": {
@@ -5166,7 +5166,7 @@
   },
   "stat.te.pair.lrA.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$2.50",
+   "tex": "\\ensuremath{-}2.50",
    "value": -0.024999999999999994
   },
   "stat.te.pair.lrA.dmax.r1": {
@@ -5181,7 +5181,7 @@
   },
   "stat.te.pair.lrA.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$2.25",
+   "tex": "\\ensuremath{-}2.25",
    "value": -0.022500000000000013
   },
   "stat.te.pair.lrA.dmean.r1": {
@@ -5196,7 +5196,7 @@
   },
   "stat.te.pair.lrA.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.3.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.24",
+   "tex": "\\ensuremath{-}0.24",
    "value": -0.002409528301591291
   },
   "stat.te.pair.lrA.dstd.r1": {
@@ -5211,7 +5211,7 @@
   },
   "stat.te.pair.lrB.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.1.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$1.50",
+   "tex": "\\ensuremath{-}1.50",
    "value": -0.015000000000000013
   },
   "stat.te.pair.lrB.dmax.r1": {
@@ -5226,7 +5226,7 @@
   },
   "stat.te.pair.lrB.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.1.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$1.46",
+   "tex": "\\ensuremath{-}1.46",
    "value": -0.014583333333333344
   },
   "stat.te.pair.lrB.dmean.r1": {
@@ -5241,7 +5241,7 @@
   },
   "stat.te.pair.lrB.dstd.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.tent_full_lr_x0.1.per_seed.r0.std_diff_c_minus_k",
-   "tex": "$-$0.05",
+   "tex": "\\ensuremath{-}0.05",
    "value": -0.0004883648268869677
   },
   "stat.te.pair.lrB.dstd.r1": {
@@ -5256,12 +5256,12 @@
   },
   "stat.te.pair.nglob.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$0.33",
+   "tex": "\\ensuremath{-}0.33",
    "value": -0.003333333333333327
   },
   "stat.te.pair.nglob.dmax.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r1.max_diff_c_minus_k",
-   "tex": "$-$5.83",
+   "tex": "\\ensuremath{-}5.83",
    "value": -0.05833333333333335
   },
   "stat.te.pair.nglob.dmax.r2": {
@@ -5271,7 +5271,7 @@
   },
   "stat.te.pair.nglob.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.33",
+   "tex": "\\ensuremath{-}0.33",
    "value": -0.003333333333333348
   },
   "stat.te.pair.nglob.dmean.r1": {
@@ -5291,7 +5291,7 @@
   },
   "stat.te.pair.nglob.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_global.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$2.63",
+   "tex": "\\ensuremath{-}2.63",
    "value": -0.026263896062049506
   },
   "stat.te.pair.nglob.dstd.r2": {
@@ -5301,7 +5301,7 @@
   },
   "stat.te.pair.noad.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.no_adapt.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$0.17",
+   "tex": "\\ensuremath{-}0.17",
    "value": -0.0016666666666666774
   },
   "stat.te.pair.noad.dmax.r1": {
@@ -5316,7 +5316,7 @@
   },
   "stat.te.pair.noad.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.no_adapt.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.29",
+   "tex": "\\ensuremath{-}0.29",
    "value": -0.0029166666666666854
   },
   "stat.te.pair.noad.dmean.r1": {
@@ -5346,7 +5346,7 @@
   },
   "stat.te.pair.nstep.dmax.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.max_diff_c_minus_k",
-   "tex": "$-$0.17",
+   "tex": "\\ensuremath{-}0.17",
    "value": -0.0016666666666666774
   },
   "stat.te.pair.nstep.dmax.r1": {
@@ -5361,7 +5361,7 @@
   },
   "stat.te.pair.nstep.dmean.r0": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r0.mean_diff_c_minus_k",
-   "tex": "$-$0.29",
+   "tex": "\\ensuremath{-}0.29",
    "value": -0.0029166666666666854
   },
   "stat.te.pair.nstep.dmean.r1": {
@@ -5381,7 +5381,7 @@
   },
   "stat.te.pair.nstep.dstd.r1": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.paired_vs_candidate.norm_matched_per_step_causal.per_seed.r1.std_diff_c_minus_k",
-   "tex": "$-$2.28",
+   "tex": "\\ensuremath{-}2.28",
    "value": -0.022805801740142267
   },
   "stat.te.pair.nstep.dstd.r2": {
@@ -5446,7 +5446,7 @@
   },
   "stat.te.util.gain.r2": {
    "source": "runs/stage2_order_penalty_0119a34/stationary_fixed_batches/summary.json:decision.seedwise.terminal_error.per_arm.tent_utility_only.per_seed.r2.mean_gain_vs_no_adapt",
-   "tex": "$-$7.42",
+   "tex": "\\ensuremath{-}7.42",
    "value": -0.07416666666666664
   },
   "stat.te.util.max.r0": {

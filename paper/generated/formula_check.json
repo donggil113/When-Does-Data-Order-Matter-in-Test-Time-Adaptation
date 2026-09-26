@@ -1,0 +1,9 @@
+{
+ "exact_quadratic_cases": 200,
+ "exact_quadratic_all_equal": true,
+ "quartic_cases": 200,
+ "quartic_bound_holds": 200,
+ "quartic_max_resid_over_bound": 0.9955421594921502,
+ "seed": 20260926,
+ "note": "numerical checks of a standard Taylor estimate; not a proof"
+}

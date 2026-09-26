@@ -42,3 +42,10 @@ Claude Code(Anthropic)를 원격 컨테이너 세션에서 에이전트로 실�
 - **작업 범위.** 메인 에이전트 혼자 수행했다. 대조군 설계 수정, stage driver, 판정 규칙, config 고정, 실행, STATUS 갱신이 포함된다. sub-agent는 쓰지 않았다.
 - **환경 변경 없음.** 패키지 설치, 모델·데이터 다운로드, 네트워크 호출이 없었다. `.venv`도 만들지 않았다(stdlib로 충분).
 - **연구자 확인 필요.** 판정 규칙과 사전등록값은 AI가 실행 전에 정해 커밋했다. 연구자의 사후 확인이 필요하다.
+
+## 원고 Working Draft v0 (2026-09-26)
+
+- **작업 범위.** 메인 에이전트가 원고 전체(영어 LaTeX)를 작성했다. 표·숫자 exporter, 수식 검사 스크립트, 빌드 스크립트도 작성했다. sub-agent는 쓰지 않았다.
+- **외부 자료.** 공식 ICLR 2027 guideline 페이지와 style ZIP(sha256 `0d940dfa…`)을 내려받아, style 파일을 수정 없이 사용했다.
+- **빌드 도구.** Ubuntu 저장소의 TeX Live와 poppler-utils .deb를 받아, 시스템에 설치하지 않고 scratchpad에 풀어 썼다. 연구 데이터와 모델 가중치는 받지 않았다.
+- **사람 검토 대기.** 원고의 AI use statement에 사람 검토 대기(`HUMAN_REVIEW_PENDING`)를 명시했다. 저자, 검토자, 라이선스는 만들어 넣지 않았다.

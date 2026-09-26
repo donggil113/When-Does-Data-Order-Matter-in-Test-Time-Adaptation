@@ -21,3 +21,6 @@ C19	Sweeney (2026) uses the commutator to choose domain order, not a subspace	se
 C20	No confidence interval pooling seeds and orders; independent units are 3 world seeds	sec:setting; sec:experiments	design	src/ordertta/analysis.py seedwise_condition_summary/decide_stage	CODE_READ
 C21	Decision rule, seeds and MIE committed before the run	sec:setting; app:repro	provenance	git: configs/stage2_* added in commit 0119a34; stage_manifest.json git.commit=0119a34 dirty=False	RAW_EXPORTED
 C22	Real-image TTA, new environment, extra seeds, continuous pools	app:planned	plan	STATUS.md	NOT_RUN
+C23	STATUS.md stage-2 stationary table (96 cells) agrees with raw summary values	(repository STATUS.md; not in manuscript)	consistency_check	STATUS.md vs paper/generated/results.json stat.te.*	RAW_CROSSCHECKED (no mismatch)
+C24	Formula checks: exact identity 200/200 quadratic cases; remainder bound 200/200 quartic cases (max ratio 0.996)	app:formula-check	numeric_check	paper/generated/formula_check.json	NUMERIC_CHECK_ONLY (not a proof)
+C25	Main text is 8 pages (limit 9); PDF built with official ICLR 2027 style	PAPER_STATUS.md; BUILD.md	build	paper/build/main.log; paper/build/main.aux (sec:conclusion on page 8)	BUILD_VERIFIED

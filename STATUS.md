@@ -1,6 +1,6 @@
 # STATUS: P1 "When Does Data Order Matter in Test-Time Adaptation?"
 
-최종 갱신: 2026-09-26 (stage 2). branch는 `claude/data-order-test-time-adaptation-runqs4`이다.
+최종 갱신: 2026-09-26 (원고 v0). branch는 `claude/data-order-test-time-adaptation-runqs4`이다.
 
 ## 요약
 
@@ -10,6 +10,20 @@
 | 과학 (stage 2 toy 진단) | **ORDER_PENALTY_ADDED_UTILITY_NOT_SUPPORTED** (이 합성 toy 환경에 한정). `TOY_DIAGNOSTIC_ONLY_NOT_EVIDENCE_ABOUT_REAL_TTA` |
 | candidate | **CANDIDATE_PAUSED**: λ, seed, model sweep로 되살리지 않는다. 추가 학습도 보류한다 |
 | 실데이터 | `BLOCKED` (아래 차단 요인). 자동 실행하지 않음 |
+| 원고 | **Working Draft v0 빌드 완료**: `paper/main.pdf` 14쪽, 본문 8쪽(제한 9쪽). 공식 ICLR 2027 style을 수정 없이 사용. 제출하지 않음. `HUMAN_REVIEW_PENDING`. 상세는 `paper/PAPER_STATUS.md` |
+
+## 원고 Working Draft v0 (이번 작업)
+
+- **실행 범위.** 새 실험, 재학습, λ/lr 확대, 새 world, 실데이터 반입은 없었다. 수행한 작업은 기존 결과의 재분석과 소형 수식 검사뿐이다.
+  - 분석 CPU: 2.4초 / 600초.
+  - 빌드·정적 검사 CPU: 79.2초 / 600초. 실패한 빌드 2회를 포함해 `paper/generated/budget_log.tsv`에 기록했다.
+- **숫자의 출처.** `paper/scripts/export_results.py`가 `runs/stage2_order_penalty_0119a34/`의 원자료를 읽어 표와 `\res{}` 매크로를 생성한다. 본문과 abstract는 이 매크로만 쓴다.
+- **r0/r2 동일성.** 9개 (조건, seed) 쌍 중 6개(r0, r2)에서 candidate와 utility-only가 완전히 같았다: 같은 pool 방향, 같은 projector, 같은 lr, 같은 시작 상태, 그리고 raw log의 θ_T hash와 step별 update norm까지 동일했다.
+  - 원인: 조기 종료로 정해진 rank 2에서, 같은 통계로 효용 상위 2개를 고르면 penalty가 고른 방향과 일치한다. 이후 과정은 결정적이다.
+- **수식 검사.** 두 단계 항등식이 유리수 quadratic 200/200 사례에서 정확히 일치했다. 잔차 상한도 quartic 200/200 사례에서 성립했다. 증명이 아니라 수치 검사다.
+- **표시 이름.** `tent_full`은 원고에서 "EM-toy"로 표시한다(공식 Tent 구성과 다름). arm id와 run id는 바꾸지 않았다. meta label을 쓰는 부분공간 arm은 source-free라고 부르지 않았다.
+- **요약 대조.** STATUS의 stage-2 stationary 표 96개 셀이 원자료와 일치했다. 정정은 필요 없었다.
+- **빌드 도구.** 서명된 Ubuntu 저장소의 TeX Live .deb를 **시스템에 설치하지 않고** scratchpad에 풀어 썼다(46.1 MB). 페이지 확인용으로 poppler-utils도 같은 방식으로 썼다. 절차는 `paper/BUILD.md`에 있다.
 
 ## Stage 2: 감독정보와 배치 효과를 통제한 제한적 TTA 진단 (commit `0119a34`)
 

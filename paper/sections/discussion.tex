@@ -15,16 +15,16 @@ outcome of a formal power analysis, which we did not perform. Choosing an enviro
 adapts usefully is left as planned work (Appendix~\ref{app:planned}).
 
 \paragraph{Discrete pool and greedy selection.} The candidate chooses among $2\times\res{dim}$ fixed
-orthonormal pool directions with a greedy, early-stopping rule. With rank $\res{ranks}$ selected everywhere,
+orthonormal pool directions with a greedy, early-stopping rule. With rank \res{ranks} selected everywhere,
 the space of distinct choices was small, which makes coincidence with the utility-only control likely. A
 continuous or larger pool could behave differently; we did not test one.
 
 \paragraph{Learning-rate grid boundary.} The candidate's development-selected learning rate was the grid
-maximum in $\res{ncandbound}$ of $9$ condition--seed pairs. Selecting the upper boundary does not show that
+maximum in \res{ncandbound} of $9$ condition--seed pairs. Selecting the upper boundary does not show that
 the optimum was found, and all learning-rate-dependent comparisons inherit this caveat. We kept the grid
 fixed rather than widening it after seeing results.
 
-\paragraph{Few worlds and sampled orders.} There are $\res{nseeds}$ world seeds and $\res{norders}$ sampled
+\paragraph{Few worlds and sampled orders.} There are \res{nseeds} world seeds and \res{norders} sampled
 orders per seed. The worst observed order is not a bound on the risk over all orders. We report per-seed
 paired differences instead of confidence intervals over pooled orders.
 

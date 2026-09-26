@@ -2,3 +2,24 @@ utc	budget	cpu_cap_s	cpu_used_s	peak_rss_mib	wall_s	exit	command
 2026-09-26T22:40:04Z	analysis	600	0.31	40.8	0.53	0	python3 paper/scripts/export_results.py
 2026-09-26T22:41:13Z	analysis	600	0.26	40.9	0.26	0	python3 paper/scripts/export_results.py
 2026-09-26T22:43:31Z	analysis	600	0.26	40.8	0.26	0	python3 paper/scripts/export_results.py
+2026-09-26T22:47:38Z	analysis	600	0.13	10.7	0.14	0	python3 paper/scripts/check_two_step_identity.py
+2026-09-26T22:47:38Z	analysis	600	0.08	13.7	0.09	0	python3 -m unittest tests.test_quadratic_order
+2026-09-26T22:49:59Z	build	600	6.78	40.6	6.81	0	pdftex -ini -etex -interaction=nonstopmode -jobname=pdflatex -progname=pdflatex pdflatex.ini
+2026-09-26T22:50:14Z	build	600	1.24	36.9	1.25	1	sh paper/scripts/build_pdf.sh
+2026-09-26T22:50:27Z	build	600	1.18	37.1	1.18	1	sh paper/scripts/build_pdf.sh
+2026-09-26T22:51:15Z	build	600	3.57	37.6	3.60	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:52:03Z	analysis	600	0.32	40.8	0.33	0	python3 paper/scripts/export_results.py
+2026-09-26T22:52:07Z	build	600	4.40	37.6	4.43	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:52:46Z	analysis	600	0.29	40.9	0.29	0	python3 paper/scripts/export_results.py
+2026-09-26T22:52:51Z	build	600	4.53	37.6	4.58	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:54:45Z	analysis	600	0.25	41.1	0.25	0	python3 paper/scripts/export_results.py
+2026-09-26T22:54:49Z	build	600	3.38	37.7	3.41	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:55:36Z	build	600	3.34	37.7	3.35	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:56:14Z	build	600	3.38	37.8	3.41	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:56:55Z	build	600	3.34	37.6	3.36	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:57:44Z	analysis	600	0.25	40.8	0.25	0	python3 paper/scripts/export_results.py
+2026-09-26T22:57:48Z	build	600	3.54	37.7	3.58	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:58:17Z	build	600	3.59	37.6	3.63	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:59:01Z	analysis	600	0.26	40.9	0.26	0	python3 paper/scripts/export_results.py
+2026-09-26T22:59:04Z	build	600	3.59	37.8	3.64	0	sh paper/scripts/build_pdf.sh
+2026-09-26T22:59:38Z	build	600	33.35	27.9	33.64	0	python3 -m unittest discover -s tests -t .

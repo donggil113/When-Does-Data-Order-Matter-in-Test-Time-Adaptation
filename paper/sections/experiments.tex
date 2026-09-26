@@ -2,39 +2,39 @@
 \label{sec:experiments}
 
 All numbers below come from a single recorded run of the frozen configuration at commit
-\texttt{\res{commit}}. That run covers $3$ conditions $\times$ $\res{nseeds}$ world seeds $\times$
-$\res{norders}$ orders $\times$ $8$ arms, and $\res{ncellsok}$ of its $\res{ncells}$ cells completed. The
+\texttt{\res{commit}}. That run covers $3$ conditions $\times$ \res{nseeds} world seeds $\times$
+\res{norders} orders $\times$ $8$ arms, and \res{ncellsok} of its \res{ncells} cells completed. The
 cells are not independent replicates: orders are nested in world seeds, and the three conditions reuse the
-same worlds. The whole run used $\res{cpu}$\,s of a $\res{cpubudget}$\,s CPU budget, with peak resident
-memory $\res{rss}$\,MiB, on one worker and one thread.
+same worlds. The whole run used \res{cpu}\,s of a \res{cpubudget}\,s CPU budget, with peak resident
+memory \res{rss}\,MiB, on one worker and one thread.
 
 \paragraph{Decision.} The pre-registered rule returned \emph{order penalty added utility not supported},
-with $\res{nreasons}$ failed conditions. The candidate's stationary gain over no adaptation was
-$\res{ev.gain.r0}$, $\res{ev.gain.r1}$ and $\res{ev.gain.r2}$\,pp in the three seeds, so the gain condition
-failed. Its SD reduction relative to EM-toy was $\res{ev.stdred.r0}$, $\res{ev.stdred.r1}$ and
-$\res{ev.stdred.r2}$\,pp, negative in one seed, so the robustness condition failed. It dominated none of the
-five required controls. In drift its seed-mean gain over no adaptation was $\res{ev.drift.re.gain}$\,pp
-(current regime) and $\res{ev.drift.on.gain}$\,pp (online).
+with \res{nreasons} failed conditions. The candidate's stationary gain over no adaptation was
+\res{ev.gain.r0}, \res{ev.gain.r1} and \res{ev.gain.r2}\,pp in the three seeds, so the gain condition
+failed. Its SD reduction relative to EM-toy was \res{ev.stdred.r0}, \res{ev.stdred.r1} and
+\res{ev.stdred.r2}\,pp, negative in one seed, so the robustness condition failed. It dominated none of the
+five required controls. In drift its seed-mean gain over no adaptation was \res{ev.drift.re.gain}\,pp
+(current regime) and \res{ev.drift.on.gain}\,pp (online).
 
 \input{tables/tab_stationary}
 
 \paragraph{Primary stationary condition (Table~\ref{tab:stationary}).} With fixed batch membership, EM-toy did
-not improve on no adaptation in any seed: its gains were $\res{stat.te.full.gain.r0}$,
-$\res{stat.te.full.gain.r1}$ and $\res{stat.te.full.gain.r2}$\,pp. Its order SD was
-$\res{stat.te.full.std.r0}$, $\res{stat.te.full.std.r1}$ and $\res{stat.te.full.std.r2}$\,pp. The small-step
+not improve on no adaptation in any seed: its gains were \res{stat.te.full.gain.r0},
+\res{stat.te.full.gain.r1} and \res{stat.te.full.gain.r2}\,pp. Its order SD was
+\res{stat.te.full.std.r0}, \res{stat.te.full.std.r1} and \res{stat.te.full.std.r2}\,pp. The small-step
 controls had a smaller SD than EM-toy in every seed. For lr$\times$0.1 the gains were
-$\res{stat.te.lrB.gain.r0}$, $\res{stat.te.lrB.gain.r1}$ and $\res{stat.te.lrB.gain.r2}$\,pp, all below the
+\res{stat.te.lrB.gain.r0}, \res{stat.te.lrB.gain.r1} and \res{stat.te.lrB.gain.r2}\,pp, all below the
 MIE. The candidate had the lowest error in seed r0, tied with the identical utility-only run discussed below,
 but it was worse than no adaptation in seeds r1 and r2. In seed r2 its
-error was $\res{stat.te.cand.mean.r2}$\% against $\res{stat.te.noad.mean.r2}$\% without adaptation. In this
+error was \res{stat.te.cand.mean.r2}\% against \res{stat.te.noad.mean.r2}\% without adaptation. In this
 environment low order sensitivity is attained most easily by adapting little: no adaptation has zero SD by
 construction.
 
 \input{tables/tab_paired}
 
 \paragraph{Paired comparison with the controls (Table~\ref{tab:paired}).} Relative to the utility-only
-control, the candidate's mean-error difference was $\res{stat.te.pair.util.dmean.r0}$,
-$\res{stat.te.pair.util.dmean.r1}$ and $\res{stat.te.pair.util.dmean.r2}$\,pp. Relative to the
+control, the candidate's mean-error difference was \res{stat.te.pair.util.dmean.r0},
+\res{stat.te.pair.util.dmean.r1} and \res{stat.te.pair.util.dmean.r2}\,pp. Relative to the
 reduced-learning-rate and norm-matched controls it was better in seed r0 and worse in seeds r1 and r2. Under
 the rule, a control counts as explained away only if the candidate beats it with the same sign in all three
 seeds; no control met that criterion.
@@ -42,17 +42,17 @@ seeds; no control met that criterion.
 \input{tables/tab_identity}
 
 \paragraph{Why the candidate and the utility-only control coincide in two seeds (Table~\ref{tab:identity}).}
-The candidate's greedy early stop selected rank $\res{ranks}$ in every condition and seed. The utility-only
+The candidate's greedy early stop selected rank \res{ranks} in every condition and seed. The utility-only
 control is rank-matched and reuses the same pool and meta statistics, so it selects the top two directions by
 supervised gain. In seeds r0 and r2 these were exactly the directions the penalized score kept, so the two
 arms used the same projector $P_SP_S^\top$. Development tuning then selected the same learning rate for
 both, because tuning sees identical computations. Everything else is shared by construction: the source
 model and $\theta_0$ (checked before every run), the batches and their order, and a deterministic update
 without randomness, momentum or buffers. The two runs are therefore the same computation. The raw logs confirm
-identical terminal parameters and identical per-step update norms on all orders in $\res{nidentical}$ of the
-$\res{nidentityrows}$ condition--seed pairs. The order penalty altered the selected subspace only in seed r1,
+identical terminal parameters and identical per-step update norms on all orders in \res{nidentical} of the
+\res{nidentityrows} condition--seed pairs. The order penalty altered the selected subspace only in seed r1,
 where the candidate kept pool directions $[1,5]$ instead of $[0,2]$, development tuning selected a larger
-learning rate, and the candidate was worse by $\res{stat.te.pair.util.dmean.r1}$\,pp. We do not read efficacy
+learning rate, and the candidate was worse by \res{stat.te.pair.util.dmean.r1}\,pp. We do not read efficacy
 into any single seed. The observation is that, in this implementation, the penalty rarely changed the
 selection, and when it did the change did not help.
 
@@ -60,24 +60,24 @@ selection, and when it did the change did not help.
 
 \paragraph{Drift (Table~\ref{tab:drift}).} Scored on the current regime's holdout at each block end, no
 adapting arm improved on no adaptation by the MIE in any seed. The candidate's seed-mean difference from the
-utility-only control was $\res{ev.drift.re.vsutil}$\,pp for the current regime (within the tolerance of
-$\res{tolg}$\,pp) and $\res{ev.drift.on.vsutil}$\,pp for online error (outside it). Its gain over no
+utility-only control was \res{ev.drift.re.vsutil}\,pp for the current regime (within the tolerance of
+\res{tolg}\,pp) and \res{ev.drift.on.vsutil}\,pp for online error (outside it). Its gain over no
 adaptation was negative on both metrics. Online errors and the mixture-holdout errors are in
 Tables~\ref{tab:drift-online} and~\ref{tab:drift-mixture}. Drift results are reported apart from stationary
 results and are not pooled with them.
 
 \paragraph{Secondary condition and diagnostics.} Re-forming batches for every order
 (Table~\ref{tab:reshuffle}) gave the same qualitative pattern: the candidate-minus-utility-only difference
-was $\res{reshuf.te.pair.util.dmean.r0}$, $\res{reshuf.te.pair.util.dmean.r1}$ and
-$\res{reshuf.te.pair.util.dmean.r2}$\,pp.
+was \res{reshuf.te.pair.util.dmean.r0}, \res{reshuf.te.pair.util.dmean.r1} and
+\res{reshuf.te.pair.util.dmean.r2}\,pp.
 
-The candidate's tuned learning rate was the largest grid value, $\res{lrmax}$, in $\res{ncandbound}$ of $9$
+The candidate's tuned learning rate was the largest grid value, \res{lrmax}, in \res{ncandbound} of $9$
 condition--seed pairs. We therefore cannot claim that its learning rate was well tuned, and we did not widen
 the grid.
 
 Predicted classes on the holdout became more concentrated in seed r2. The largest class share was
-$\res{stat.diag.cand.maxshare.r2}$ for the candidate against $\res{stat.diag.noad.maxshare.r2}$ without
-adaptation, and $\res{drift.diag.cand.maxshare.r2}$ in drift. This is partial concentration, not a
+\res{stat.diag.cand.maxshare.r2} for the candidate against \res{stat.diag.noad.maxshare.r2} without
+adaptation, and \res{drift.diag.cand.maxshare.r2} in drift. This is partial concentration, not a
 single-class collapse (Table~\ref{tab:diag}).
 
 Actual per-arm spend, including the lockstep reference of the causal control and the shared meta statistics

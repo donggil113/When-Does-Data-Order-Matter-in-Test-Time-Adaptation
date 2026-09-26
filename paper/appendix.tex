@@ -19,6 +19,7 @@ it with seed, $\lambda$, learning-rate or model sweeps.
 the utility-only control is an artefact of the eight-direction pool.
 \end{itemize}
 
+\clearpage
 \section{Additional Tables}
 \label{app:tables}
 \input{tables/tab_reshuffle}
@@ -32,17 +33,17 @@ the utility-only control is an artefact of the eight-direction pool.
 \section{Derivation Details and Numerical Checks}
 \label{app:derivation}
 \paragraph{Sign convention.} $U_b(U_a(\theta))$ applies $a$ first. In the code,
-\texttt{two\_step\_order\_difference(theta, a, b)} returns $\theta_{ab}-\theta_{ba}$ with
-$\theta_{ab}=U_b(U_a(\theta))$, which matches Eq.~\eqref{eq:twostep}.
+\path{two_step_order_difference}\texttt{(theta, a, b)} returns $\theta_{ab}-\theta_{ba}$ with
+$\theta_{ab}=U_b(U_a(\theta))$, which matches Eq.~(\plaineqref{eq:twostep}).
 
-\paragraph{Remainder.} Eq.~\eqref{eq:twostep} requires only that each Hessian be Lipschitz on the relevant
+\paragraph{Remainder.} Eq.~(\plaineqref{eq:remainder}) requires only that each Hessian be Lipschitz on the relevant
 segment. It follows from the integral form of Taylor's theorem applied to $\nabla L_b$ along
 $[\theta,\theta-\eta g_a]$, and symmetrically for $\nabla L_a$. This is a standard estimate, not a new result.
 For $K$ steps, $\theta_K=\theta-\eta\sum_k g_{\pi_k}+\eta^2\sum_{i<j}H_{\pi_j}g_{\pi_i}+O(\eta^3)$, again under
 local regularity.
 
 \paragraph{Numerical fixtures (implementation checks, not proofs).} The repository tests
-(\texttt{tests/test\_quadratic\_order.py}) cover five cases:
+(\path{tests/test_quadratic_order.py}) cover five cases:
 \begin{enumerate}
 \item On random quadratics, the exact two-step difference matches the second-order term to floating-point
 precision for $\eta\in\{10^{-3},0.05,0.3,1\}$.
@@ -53,8 +54,7 @@ $0.1$ at $\eta L\approx 0.3$.
 \item A three- and four-step prediction has a remainder of order three.
 \item Only plain SGD is accepted, and stateful optimizers are rejected.
 \end{enumerate}
-The exact-rational and remainder-bound checks run for this draft are reported in
-Appendix~\ref{app:formula-check}.
+The exact-rational and remainder-bound checks run for this draft are in Appendix~\ref{app:formula-check}.
 
 \section{Information Access and Implementation Details}
 \label{app:access}
@@ -66,17 +66,17 @@ Appendix~\ref{app:formula-check}.
 read only by a predict-then-score oracle after the prediction for that sample is committed, and holdout
 labels are read only by the evaluators.}
 \label{tab:access}
-\begin{tabular}{lllll}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.6cm}}
 \toprule
-Arm & Meta data & Meta labels & $\eta$ source & Extra information \\
+Arm & Meta data and labels & $\eta$ source & Extra information \\
 \midrule
-No adaptation & -- & -- & -- & -- \\
-EM-toy (full affine) & -- & -- & dev.\ grid & -- \\
-EM-toy, lr$\times$0.3 / $\times$0.1 & -- & -- & EM-toy $\eta\times$ factor & -- \\
-Candidate & yes & yes & dev.\ grid & -- \\
-Utility-only & same as candidate & same & dev.\ grid & candidate's rank \\
-Per-step norm-matched & -- & -- & (direction only) & candidate's step-$t$ norm, lockstep \\
-Global norm-matched & -- & -- & calibration bisection & candidate's mean displacement \\
+No adaptation & -- & -- & -- \\
+EM-toy (full affine) & -- & development grid & -- \\
+EM-toy, lr$\times$0.3 / $\times$0.1 & -- & EM-toy $\eta$ times factor & -- \\
+Candidate & yes & development grid & -- \\
+Utility-only & same as candidate & development grid & candidate's realised rank \\
+Per-step norm-matched & -- & direction only & candidate's step-$t$ norm (lockstep replica) \\
+Global norm-matched & -- & calibration bisection & candidate's mean terminal displacement \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -88,13 +88,14 @@ candidate run on every order.
 
 \section{Reproducibility Details and Deviations}
 \label{app:repro}
+{\raggedright
 \begin{itemize}
-\item \textbf{Frozen configuration.} \texttt{configs/stage2\_order\_penalty\_diagnostic.json} (stage and
-decision rule), \texttt{configs/stage2\_stationary\_fixed\_batches.json},
-\texttt{configs/stage2\_drift\_fixed\_batches.json} and \texttt{configs/stage2\_stationary\_reshuffle.json}.
+\item \textbf{Frozen configuration.} \path{configs/stage2_order_penalty_diagnostic.json} (stage and
+decision rule), \path{configs/stage2_stationary_fixed_batches.json},
+\path{configs/stage2_drift_fixed_batches.json} and \path{configs/stage2_stationary_reshuffle.json}.
 All were committed before the run.
-\item \textbf{Raw outputs.} \texttt{runs/stage2\_order\_penalty\_0119a34/}, containing the stage summary and
-manifest, and for each condition \texttt{raw\_log.jsonl}, \texttt{summary.json} and \texttt{manifest.json}.
+\item \textbf{Raw outputs.} \path{runs/stage2_order_penalty_0119a34/}, containing the stage summary and
+manifest, and for each condition \path{raw_log.jsonl}, \path{summary.json} and \path{manifest.json}.
 \item \textbf{Design changes before this run.} An earlier plan (two toy pilot configurations with re-formed
 batches and a pooled-bootstrap decision rule) was never run. Before the run we made the following changes:
 \begin{itemize}
@@ -103,14 +104,27 @@ batches and a pooled-bootstrap decision rule) was never run. Before the run we m
 \item made per-step norm matching causal and removed label reads from calibration;
 \item replaced the pooled bootstrap with per-seed paired differences.
 \end{itemize}
-A separate code-path smoke run on a smaller world is recorded in \texttt{runs/cpu\_smoke\_b7edd9f/}. It
+A separate code-path smoke run on a smaller world is recorded in \path{runs/cpu_smoke_b7edd9f/}. It
 predates these changes and is not evidence.
 \item \textbf{Display names.} Arm identifiers in logs and configurations are unchanged; for example,
 \texttt{tent\_full} is displayed as EM-toy.
 \end{itemize}
+}
 
 \section{Formula Checks for This Draft}
 \label{app:formula-check}
-\draftnote{PENDING in v0: an exact-rational check of Eq.~\eqref{eq:twostep} for quadratics and a numerical
-check of the stated remainder bound on quartic fixtures are run after this version is saved; results will be
-inserted here.}
+Two small checks were run with \path{paper/scripts/check_two_step_identity.py} (seed fixed in the script;
+output \path{paper/generated/formula_check.json}). Both are numerical checks of a standard Taylor
+estimate, not proofs.
+\begin{itemize}
+\item \textbf{Exact quadratic identity.} In \res{fc.exact_quadratic_cases} random cases with rational
+symmetric Hessians, rational centres, starting points and step sizes, in dimension $2$--$4$, the rational
+arithmetic difference $U_b(U_a(\theta))-U_a(U_b(\theta))$ equalled $\eta^2(H_bg_a-H_ag_b)$ exactly in
+\res{fc.exact_all} cases.
+\item \textbf{Remainder bound.} We used quartic-perturbed quadratics
+$L(x)=\tfrac12 r^\top A r+\tfrac{\kappa}{4}\sum_i r_i^4$ with $r=x-c$. On any segment where $|r_i|\le R$,
+$6\kappa R$ is a valid Lipschitz constant of the Hessian in operator 2-norm. With this constant, the bound
+of Eq.~(\plaineqref{eq:remainder}) held in \res{fc.quartic_bound_holds} of \res{fc.quartic_cases} random cases
+with $\eta\in[10^{-3},10^{-0.5}]$. The largest remainder-to-bound ratio was \res{fc.maxratio}, so the
+bound is not vacuous on these fixtures.
+\end{itemize}

@@ -7,6 +7,7 @@
 - 선행연구 대조: `docs/prior_art.md`
 - 파일럿 계획: `docs/pilot_plan.md`
 - AI 사용 기록: `AI_USAGE.md`
+- 원고 Working Draft v0 (제출하지 않음): `paper/main.pdf`, 소스 `paper/`, 상태 `paper/PAPER_STATUS.md`, 빌드 `paper/BUILD.md`
 
 순서 의존성 자체, reset, 2-step 교환자 공식, 저차원 적응은 모두 알려진 결과다. 이 저장소는 이것들을 새로운 기여로 주장하지 않는다.
 

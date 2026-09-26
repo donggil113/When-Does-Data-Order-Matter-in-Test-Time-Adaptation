@@ -11,16 +11,17 @@ U_b(U_a(\theta)) = \theta-\eta g_a-\eta\,\nabla L_b(\theta-\eta g_a).
 If $\nabla^2 L_b$ is $M_b$-Lipschitz on the segment $[\theta,\theta-\eta g_a]$, Taylor's theorem gives
 $\nabla L_b(\theta-\eta g_a)=g_b-\eta H_b g_a+\rho_b$ with $\|\rho_b\|\le \tfrac{M_b}{2}\eta^2\|g_a\|^2$.
 The symmetric statement holds for $\rho_a$ on $[\theta,\theta-\eta g_b]$. Subtracting the reversed order,
-\begin{equation}
-U_b(U_a(\theta))-U_a(U_b(\theta)) = \eta^2\left(H_b g_a - H_a g_b\right) - \eta(\rho_b-\rho_a),
-\qquad \|\eta(\rho_b-\rho_a)\|\le \tfrac{\eta^3}{2}\left(M_b\|g_a\|^2+M_a\|g_b\|^2\right).
-\label{eq:twostep}
-\end{equation}
+\begin{align}
+U_b(U_a(\theta))-U_a(U_b(\theta)) &= \eta^2\left(H_b g_a - H_a g_b\right) - \eta(\rho_b-\rho_a),
+\label{eq:twostep}\\
+\|\eta(\rho_b-\rho_a)\| &\le \tfrac{\eta^3}{2}\left(M_b\|g_a\|^2+M_a\|g_b\|^2\right).
+\label{eq:remainder}
+\end{align}
 For quadratic losses the Hessians are constant ($M_a=M_b=0$), so the second-order term is the \emph{exact}
 two-step difference for every $\eta$. For smooth non-quadratic losses it is only the leading term, and
-Eq.~\eqref{eq:twostep} is informative only when $\eta$ times the local curvature is small. Our numerical
+Eqs.~(\plaineqref{eq:twostep})--(\plaineqref{eq:remainder}) are informative only when $\eta$ times the local curvature is small. Our numerical
 fixtures show a relative remainder above $0.1$ at $\eta L\approx 0.3$ (Appendix~\ref{app:derivation}).
-Eq.~\eqref{eq:twostep} is a restatement of a known expansion~\citep{nichol2018reptile,smith2021origin,sweeney2026lie}.
+Eq.~(\plaineqref{eq:twostep}) is a restatement of a known expansion~\citep{nichol2018reptile,smith2021origin,sweeney2026lie}.
 It says nothing about adaptive optimizers, long-horizon stability or generalization, and we do not use it
 as a guarantee. For $K$ steps in order $\pi$ the analogous leading term is
 $\eta^2\sum_{i<j}H_{\pi_j}g_{\pi_i}$; for $K\ge 3$ it has cubic corrections even for quadratics.
@@ -40,7 +41,7 @@ probabilities on $96$ meta probe points, all by finite differences where needed.
 \end{equation}
 where $G_{\mathrm{ref}}=\sum_j\max(0,\text{gain}(\{p_j\}))$ is the largest first-order supervised gain any pool
 subset attains. The first term is the retained fraction of first-order usefulness. The second is $\lambda$
-times the retained fraction of the output-level second-order order term of Eq.~\eqref{eq:twostep}, restricted
+times the retained fraction of the output-level second-order order term of Eq.~(\plaineqref{eq:twostep}), restricted
 to $S$. Directions are added greedily up to $k_{\max}=4$, and only while they increase the score; this
 early stop sets the candidate's rank. We fixed $\lambda=1$ and $k_{\max}=4$ in advance and did not tune them.
 
